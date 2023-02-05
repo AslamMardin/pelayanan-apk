@@ -1,11 +1,12 @@
 <?php
-
+ 
 namespace App\Providers;
-
-use Illuminate\Support\ServiceProvider;
+ 
+use App\View\Composers\ProfileComposer;
 use Illuminate\Support\Facades\View;
-
-class AppServiceProvider extends ServiceProvider
+use Illuminate\Support\ServiceProvider;
+ 
+class ViewServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
-
+ 
     /**
      * Bootstrap any application services.
      *
@@ -24,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        View::share('apk_name', 'Workit Polman');
-        View::share('apk_title', 'PELAYANAN WORKIT');
+        // Using class based composers...
+        View::composer('profile', ProfileComposer::class);
+ 
+       
     }
 }
