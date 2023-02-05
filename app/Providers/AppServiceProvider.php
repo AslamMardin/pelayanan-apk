@@ -24,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        view()->share('namaku', "aslam mardin");
+
+        View::share('apk_name', 'Workit Polman');
+        View::share('apk_title', 'PELAYANAN WORKIT');
     }
 }
