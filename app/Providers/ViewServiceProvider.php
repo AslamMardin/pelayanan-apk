@@ -2,7 +2,7 @@
  
 namespace App\Providers;
  
-use App\View\Composers\ProfileComposer;
+use App\View\Composers\WorkitComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
  
@@ -26,8 +26,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         // Using class based composers...
-        View::composer('profile', ProfileComposer::class);
+        View::composer('*', WorkitComposer::class);
  
-       
     }
 }

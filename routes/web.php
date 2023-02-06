@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // return view('workit.dashboard');
     return view('workit.dashboard');
-});
+
+})->name('workit.dashboard');
 
 Route::prefix('/workit')->group(function(){
     // halaman pelayanan
@@ -23,12 +25,17 @@ Route::prefix('/workit')->group(function(){
         return view('workit.pelayanan');
     })->name('workit.pelayanan');
 
-     // halaman pelayanan
+     // halaman pelanggan
+     Route::get('/pelanggan', function(){
+        return view('workit.pelanggan');
+    })->name('workit.pelanggan');
+
+     // halaman pemasukan
      Route::get('/pemasukan', function(){
         return view('workit.pemasukan');
     })->name('workit.pemasukan');
 
-     // halaman pelayanan
+     // halaman pengeluaran
      Route::get('/pengeluaran', function(){
         return view('workit.pengeluaran');
     })->name('workit.pengeluaran');
