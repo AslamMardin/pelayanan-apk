@@ -76,7 +76,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h4>
-              @yield('judul_halaman', 'Workit Polman')
+              @yield('judul_halaman', '')
             </h4>
             
           </div><!-- /.col -->

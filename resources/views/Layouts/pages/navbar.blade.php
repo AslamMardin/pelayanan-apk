@@ -28,9 +28,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('workit.anggota')}}" class="nav-link">
+            <a href="{{route('workit.pelanggan')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Anggota</p>
+              <p>Pelanggan</p>
             </a>
           </li>
           <li class="nav-item">

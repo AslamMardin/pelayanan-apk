@@ -2,10 +2,10 @@
  
 namespace App\View\Composers;
  
-
+use App\Models\Pelanggan;
 use Illuminate\View\View;
  
-class ProfileComposer
+class WorkitComposer
 {
  
  
@@ -17,6 +17,7 @@ class ProfileComposer
      */
     public function compose(View $view)
     {
-        $view->with('count', 'accant');
+       $pelanggans = Pelanggan::all();
+       $view->with('com_pelanggans', $pelanggans);
     }
 }

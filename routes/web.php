@@ -25,10 +25,10 @@ Route::prefix('/workit')->group(function(){
         return view('workit.pelayanan');
     })->name('workit.pelayanan');
 
-     // halaman anggota
-     Route::get('/anggota', function(){
-        return view('workit.anggota');
-    })->name('workit.anggota');
+     // halaman pelanggan
+     Route::get('/pelanggan', function(){
+        return view('workit.pelanggan');
+    })->name('workit.pelanggan');
 
      // halaman pemasukan
      Route::get('/pemasukan', function(){
