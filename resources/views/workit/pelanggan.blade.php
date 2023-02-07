@@ -41,8 +41,15 @@
                     <td>{{ $pelanggan->nomor }}</td>
                     <td>{{ $pelanggan->alamat }}</td>
                     <td>
-                       <a href="#" class="btn btn-sm btn-danger">Hapus</a>
-                       <a href="#" class="btn btn-sm btn-info">Ubah</a>
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                      <form method="post" action="{{route('pelanggan.destroy', ['pelanggan' => $pelanggan->id])}}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Anda yakin ingin hapus ?')" class="btn btn-sm btn-danger d-inline">Hapus</button>
+                      </form>
+                       
+                       <a href="{{route('pelanggan.edit', ['pelanggan' => $pelanggan->id])}}" class="btn btn-sm btn-info">Ubah</a>
+                      </div>
                     </td>
                 </tr>
                 @endforeach

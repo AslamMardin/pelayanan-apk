@@ -3,7 +3,7 @@
   <select class="custom-select form-control-border border-width-2 @error($name) is-invalid @enderror" value="{{old($name)}}" name="{{$name}}" id="{{$name}}">
     <option value="#">Pilih Item..</option>
     @foreach($data as $d)
-    <option value="{{$d}}">{{$d}}</option>
+    <option {{$attributes}} value="{{$d}}">{{$d}}</option>
     @endforeach
   </select>
   @error($name)

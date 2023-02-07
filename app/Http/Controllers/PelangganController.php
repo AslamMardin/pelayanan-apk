@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Pelanggan;
+use Illuminate\Validation\Rule;
 class PelangganController extends Controller
 {
     /**
@@ -93,7 +94,9 @@ class PelangganController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pelanggan = Pelanggan::find($id);
+        $jk = ['laki-laki', 'perempuan'];
+        return view('pelanggan.edit', compact('pelanggan', 'jk'));
     }
 
     /**
@@ -105,7 +108,36 @@ class PelangganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama' => ['required', 'min:3', 
+            Rule::unique('pelanggans', 'nama')->ignore($id)
+        ],
+            'nomor' => ['required'],
+            'alamat' => ['required'],
+            'jk' => ['required', 'in:laki-laki,perempuan']
+        ], [
+            'required' => 'Input :attribute Harus Ada',
+            'min' => [
+                "string" => ':attribute Minimal :min Karakter'
+            ],
+            'in' => 'Anda Belum memilih jenis kelamin'
+        ]);
+ 
+        if ($validator->fails()) {
+            return redirect()
+            ->route('pelanggan.create')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        Pelanggan::find($id)->update([
+            'nama' => $request->nama,
+            'nomor' => $request->nomor,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jk,
+        ]);
+
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan Berhasil Diubah");
     }
 
     /**
@@ -116,6 +148,8 @@ class PelangganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pelanggan =  Pelanggan::find($id);
+        $pelanggan->delete();
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan  Berhasil dihapus");
     }
 }
