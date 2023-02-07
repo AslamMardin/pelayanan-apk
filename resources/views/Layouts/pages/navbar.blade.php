@@ -27,12 +27,7 @@
               <p>Pelayanan</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{route('workit.pelanggan')}}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Pelanggan</p>
-            </a>
-          </li>
+         
           <li class="nav-item">
             <a href="{{route('workit.pemasukan')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>

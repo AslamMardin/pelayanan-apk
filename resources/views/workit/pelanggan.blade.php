@@ -8,8 +8,8 @@
     <div class="card-header border-0">
       <h3 class="card-title">DAFTAR PELANGGAN</h3>
       <div class="card-tools">
-        <a href="#" class="btn btn-tool btn-sm">
-          <i class="fas fa-download"></i>
+        <a href="{{route('pelanggan.create')}}" class="btn btn-tool btn-sm">
+          <i class="fas fa-user-plus"></i>
         </a>
         <a href="#" class="btn btn-tool btn-sm">
           <i class="fas fa-bars"></i>
@@ -17,7 +17,13 @@
       </div>
     </div>
     <div class="card-body table-responsive p-0">
-        <table class="table">
+
+      @if(session()->has('pesan'))
+        <x-alert type="success">
+          {{session('pesan')}}
+        </x-alert>
+      @endif
+        <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>

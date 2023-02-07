@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nomor');
-            $table->text('alamat');
+            $table->string('nomor')->default('-');
+            $table->text('alamat')->default('-');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan'])->default('laki-laki');
             $table->timestamps();
         });

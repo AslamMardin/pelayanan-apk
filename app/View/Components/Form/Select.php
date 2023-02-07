@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class Input extends Component
+class Select extends Component
 {
     /**
      * Create a new component instance.
@@ -12,13 +12,13 @@ class Input extends Component
      * @return void
      */
     public $name;
-    public $type;
+    public $data;
     public $caption;
-    public function __construct($name, $type = "text", $caption = "Your Text")
+    public function __construct($name, $data = [], $caption)
     {
         //
         $this->name = $name;
-        $this->type = $type;
+        $this->data = $data;
         $this->caption = $caption;
     }
 
@@ -29,6 +29,9 @@ class Input extends Component
      */
     public function render()
     {
-        return view('components.input');
+        return view('components.form.select', [
+            'data' => $this->data,
+            'caption' => $this->caption
+        ]);
     }
 }

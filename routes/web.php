@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PelangganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,6 @@ Route::prefix('/workit')->group(function(){
         return view('workit.pengeluaran');
     })->name('workit.pengeluaran');
 });
+
+
+Route::resource('/pelanggan', PelangganController::class);

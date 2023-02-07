@@ -1,5 +1,7 @@
 <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-      </div>
+        <label for="{{$name}}" class="form-label">{{$caption}}</label>
+        <input type="{{$type}}" name="{{$name}}" class="form-control @error($name) is-invalid @enderror" value="{{old($name)}}">
+        @error($name)
+        <div class="text-danger text-sm m-1">{{ $message }}</div>
+    @enderror
+</div>

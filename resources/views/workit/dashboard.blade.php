@@ -8,7 +8,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>0</h3>
+          <h3>{{count($com_pelanggans)}}</h3>
 
           <p>Pelanggan</p>
         </div>
@@ -37,7 +37,7 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3 sty>1.000.000</h3>
+          <h3>0</h3>
 
           <p>Pemasukan</p>
         </div>
@@ -52,7 +52,7 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3>20.000.000</h3>
+          <h3>0</h3>
 
           <p>Pengeluaran</p>
         </div>
