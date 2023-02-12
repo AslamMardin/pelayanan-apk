@@ -8,24 +8,47 @@
          <form method="post" action="{{route('pelanggan.update', ['pelanggan'=> $pelanggan->id])}}">
             @csrf
             @method('PUT')
-                <x-input name="nama" caption="Nama" value="{{$pelanggan->nama}}" />
-                <x-input name="nomor" caption="No WA/Telpon" value="{{$pelanggan->nomor}}" />
-                <x-input name="alamat" caption="Alamat" value="{{$pelanggan->alamat}}" />
+            <div class="mb-3">
+               <label for="nama" class="form-label">Nama</label>
+               <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama') ?? $pelanggan->nama}}">
+               @error('nama')
+               <div class="text-danger text-sm m-1">{{ $message }}</div>
+               @enderror
+            </div>
 
-                    <label for="jk" class="form-label">Jenis Kelamin</label>
-                    <select class="custom-select form-control-border border-width-2 @error('jk') is-invalid @enderror" value="{{old('jk')}}" name="jk" id="jk">
-                      <option value="#">Pilih Item..</option>
-                      @foreach($jk as $d)
-                      <option @selected($d == $pelanggan->jenis_kelamin || old('jk')) value="{{$d}}">{{$d}}</option>
-                      @endforeach
-                    </select>
-                    @error('jk')
-                          <div class="text-danger text-sm m-1">{{ $message }}</div>
-                      @enderror
+            <div class="mb-3">
+               <label for="nomor" class="form-label">No Telpon</label>
+               <input type="text" name="nomor" class="form-control @error('nomor') is-invalid @enderror" value="{{old('nomor') ?? $pelanggan->nomor}}">
+               @error('nomor')
+               <div class="text-danger text-sm m-1">{{ $message }}</div>
+               @enderror
+            </div>
 
-                  <x-button class="btn-danger mt-3">
-                     Ubah
-                  </x-button>
+            <div class="mb-3">
+               <label for="alamat" class="form-label">Alamat</label>
+               <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{old('alamat') ?? $pelanggan->alamat}}">
+               @error('alamat')
+               <div class="text-danger text-sm m-1">{{ $message }}</div>
+               @enderror
+            </div>
+
+            <div>
+               <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+               <select class="custom-select form-control-border border-width-2 @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin">
+                 <option value="#">Pilih Item..</option>
+                 <option value="L" @selected((old('jenis_kelamin') ?? $pelanggan->jenis_kelamin) == 'L')>Laki-Laki</option>
+                 <option value="P" @selected((old('jenis_kelamin') ?? $pelanggan->jenis_kelamin) == 'P')>Perempuan</option>
+               </select>
+               @error('jenis_kelamin')
+                     <div class="text-danger text-sm m-1">{{ $message }}</div>
+                 @enderror
+             </div>
+           
+             <div>
+               <button type="submit" class="btn mt-3 btn-primary">
+                   Simpan
+               </button>
+           </div>
            </form>
       </div>
    </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PelangganRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Pelanggan;
@@ -38,37 +39,23 @@ class PelangganController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PelangganRequest $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'nama' => ['required', 'min:3', 'unique:pelanggans'],
-            'nomor' => ['required'],
-            'alamat' => ['required'],
-            'jk' => ['required', 'in:laki-laki,perempuan']
+        $request->validate([
+            'nama' => Rule::unique('pelanggans')
         ], [
-            'required' => 'Input :attribute Harus Ada',
-            'min' => [
-                "string" => ':attribute Minimal :min Karakter'
-            ],
-            'in' => 'Anda Belum memilih jenis kelamin'
+            'unique' => ':attribute palanggan sudah ada! masukan nama lain.'
         ]);
- 
-        if ($validator->fails()) {
-            return redirect()
-            ->route('pelanggan.create')
-            ->withErrors($validator)
-            ->withInput();
-        }
-
         Pelanggan::create([
             'nama' => $request->nama,
             'nomor' => $request->nomor,
             'alamat' => $request->alamat,
-            'jenis_kelamin' => $request->jk,
+            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->route('workit.pelanggan')->with('pesan', 'Data Pelanggan Berhasil Ditambahkan');
+        $pesan = "Data ". $request->nama . "pelangga telah ditambah";
+        $request->session()->flush('pesan', $pesan);
+        return redirect()->route('workit.pelanggan');
        
     }
 
@@ -95,8 +82,8 @@ class PelangganController extends Controller
     public function edit($id)
     {
         $pelanggan = Pelanggan::find($id);
-        $jk = ['laki-laki', 'perempuan'];
-        return view('pelanggan.edit', compact('pelanggan', 'jk'));
+    
+        return view('pelanggan.edit', compact('pelanggan'));
     }
 
     /**
@@ -106,35 +93,16 @@ class PelangganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PelangganRequest $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nama' => ['required', 'min:3', 
-            Rule::unique('pelanggans', 'nama')->ignore($id)
-        ],
-            'nomor' => ['required'],
-            'alamat' => ['required'],
-            'jk' => ['required', 'in:laki-laki,perempuan']
-        ], [
-            'required' => 'Input :attribute Harus Ada',
-            'min' => [
-                "string" => ':attribute Minimal :min Karakter'
-            ],
-            'in' => 'Anda Belum memilih jenis kelamin'
+        $request->validate([
+            'nama' => Rule::unique('pelanggans')->ignore($id)
         ]);
- 
-        if ($validator->fails()) {
-            return redirect()
-            ->route('pelanggan.create')
-            ->withErrors($validator)
-            ->withInput();
-        }
-
         Pelanggan::find($id)->update([
             'nama' => $request->nama,
             'nomor' => $request->nomor,
             'alamat' => $request->alamat,
-            'jenis_kelamin' => $request->jk,
+            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
         return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan Berhasil Diubah");
@@ -150,6 +118,28 @@ class PelangganController extends Controller
     {
         $pelanggan =  Pelanggan::find($id);
         $pelanggan->delete();
-        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan  Berhasil dihapus");
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil dihapus");
+    }
+
+    public function sampah()
+    {
+        $pelanggan = Pelanggan::onlyTrashed()->get();
+        return view('pelanggan.sampah', [
+            'pelanggans' => $pelanggan
+        ]);
+    }
+
+    public function hapus($id)
+    {
+        $pelanggan = Pelanggan::withTrashed()->findOrFail($id);
+        $pelanggan->forceDelete();
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil dihapus permanent");
+    }
+
+    public function restore($id)
+    {
+        $pelanggan = Pelanggan::withTrashed()->findOrFail($id);
+        $pelanggan->restore();
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil di restore");
     }
 }

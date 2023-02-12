@@ -13,7 +13,7 @@
           <p>Pelanggan</p>
         </div>
         <div class="icon">
-          <i class="ion ion-bag"></i>
+          <i class="ion ion-person"></i>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
           <p>Pelayanan</p>
         </div>
         <div class="icon">
-          <i class="ion ion-stats-bars"></i>
+          <i class="ion ion-wrench"></i>
         </div>
         
       </div>
@@ -42,7 +42,7 @@
           <p>Pemasukan</p>
         </div>
         <div class="icon">
-          <i class="ion ion-person-add"></i>
+          <i class="ion ion-arrow-down-a"></i>
         </div>
        
       </div>
@@ -57,7 +57,7 @@
           <p>Pengeluaran</p>
         </div>
         <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+          <i class="ion ion-arrow-up-a"></i>
         </div>
        
       </div>
