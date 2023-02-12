@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\NotaDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,12 @@ class Nota extends Model
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class, 'pelanggan_id', 'id');
+    }
+
+    
+    public function notaDetail()
+    {
+        return $this->hasOne(NotaDetail::class, 'nota_id', 'id');
     }
 
     protected static function booted()

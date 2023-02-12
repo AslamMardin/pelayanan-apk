@@ -80,7 +80,7 @@
            
 
           <div class="row">
-            @foreach ($notas as $item)
+            @forelse ($notas as $item)
               @php
               if($item->jenis == "Leptop"){
                 $type = "danger";
@@ -116,7 +116,7 @@
                     <a href="#" class="text-white">
                       <i class="ion ion-eye"></i>
                     </a>
-                    <a href="#" class="text-white">
+                    <a href="{{route('dashboard.input.bayar', ['id' => $item->id])}}" class="text-white">
                       <i class="ion ion-card"></i>
                     </a>
                   </div>
@@ -124,7 +124,9 @@
               </div>
             </div>
             <!-- /.col -->
-            @endforeach
+            @empty
+            <h3 class="text-center text-muted">Nota Belum ada!</h3>
+            @endforelse
             
           </div>
 

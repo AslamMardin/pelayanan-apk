@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NotaDetail extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['garansi', 'pemasukan', 'pengeluaran', 'nota_id'];
 }
