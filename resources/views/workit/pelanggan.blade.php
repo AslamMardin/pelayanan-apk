@@ -1,5 +1,10 @@
 @extends('layouts.main')
 
+@push('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+@endpush
+
+
 
 @section('main')
 @if(session()->has('pesan'))
@@ -9,7 +14,8 @@
 @endif
 
 
-<div class="card">
+
+<div class="card p-3">
     <div class="card-header border-0">
       <h3 class="card-title">DAFTAR PELANGGAN</h3>
       <div class="card-tools">
@@ -25,7 +31,7 @@
     <div class="card-body table-responsive p-0">
 
      
-        <table class="table table-hover">
+        <table class="table table-hover" id="myTable">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -69,3 +75,14 @@
 
 
 @endsection
+
+@push('js')
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+  });
+  </script>
+@endpush

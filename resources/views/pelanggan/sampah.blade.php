@@ -51,7 +51,7 @@
 
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center fa-w-19">Data Terhapus Belum ada !</td>
+                    <td colspan="6" class="text-center fa-w-19">Data Terhapus Belum ada !</td>
                 </tr>
                 @endforelse
             </tbody>
