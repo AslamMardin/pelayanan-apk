@@ -65,6 +65,106 @@
     <!-- ./col -->
   </div>
   <!-- /.row -->
+
+
+
+  <div class="row">
+    <div class="col-sm-12 col-md-9">
+      {{-- card panel nota --}}
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Nota</h4>
+        </div>
+        <div class="card-body">
+          {{-- mulai nota --}}
+           
+
+          <div class="row">
+            @foreach ($notas as $item)
+              @php
+              if($item->jenis == "Leptop"){
+                $type = "danger";
+
+              }
+              elseif($item->jenis == "Hp"){
+                $type = "warning";
+
+              }elseif($item->jenis == "Bimbel"){
+                $type = "success";
+              }
+                else {
+                  $type = "primary";
+                } 
+              
+              @endphp
+            <!-- .col -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="info-box m-1 bg-{{$type}}">
+                <div class="info-box-content">
+                  <div class="row" style="display: flex; justify-content: space-between; font-size: 13px">
+                    <small class="text-right">{{$item->created_at->diffForHumans()}}</small>
+                    <small class="text-right" style="font-size: 11px">{{$item->created_at->format('d/m/Y')}}</small>
+                  </div>
+                  <div class="row py-1" style="border-bottom:1px dashed #000;border-top:1px dashed #000">
+                    <span class="info-box-text" style="font-size: 12px; font-weight:bold">{{ $item->nama_barang }} - {{$item->keterangan}}</span>
+                  </div>
+                  <div class="row" style="font-size: 15px;">
+                    <small>{{ $item->pelanggan->nama }}</small>
+                    
+                  </div>
+                  <div class="btn-group mt-2" style="display: flex; justify-content: space-between">
+                    <a href="#" class="text-white">
+                      <i class="ion ion-eye"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                      <i class="ion ion-card"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.col -->
+            @endforeach
+            
+          </div>
+
+
+
+          {{-- ./ mulai nota --}}
+        </div>
+        <div class="card-footer">
+          <b>Ket :</b>
+          <ul>
+            <li>Merah(Leptop)</li>
+            <li>Kuning(Hp)</li>
+            <li>Hijau(Bimbel)</li>
+            <li>Biru(Printer)</li>
+          </ul>
+        </div>
+      </div>
+      {{-- ./ card panel nota --}}
+    </div>
+    <div class="col-sm-12 col-md-3">
+       <!-- general form elements disabled -->
+       <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">Log Aktif</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            @foreach ($logs as $item)
+                <small>
+                  <b class="text-danger fw-bold d-block">{{$item->created_at->format('Y/m/d H:i:s')}}</b>
+                  {{$item->keterangan}}
+                </small><hr>
+            @endforeach
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      <!-- general form elements disabled -->
+    </div>
+  </div>
 @endsection
 @section('main')
     

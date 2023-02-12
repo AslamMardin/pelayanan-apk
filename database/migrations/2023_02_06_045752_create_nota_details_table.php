@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('nota_details', function (Blueprint $table) {
             $table->id();
-            $table->string('keterangan');
+            $table->date('garansi');
             $table->float('pemasukan', 8, 2)->default(0);
             $table->float('pengeluaran', 8, 2)->default(0);
             $table->foreignId('notas_id')

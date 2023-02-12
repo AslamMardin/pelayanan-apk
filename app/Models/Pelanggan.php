@@ -11,4 +11,12 @@ class Pelanggan extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::created(function ($pelanggan) {
+            $message = "Pelanggan $pelanggan->nama telah ditambahkan";
+            LogAktif::create(['keterangan' => $message]);
+        });
+    }
 }

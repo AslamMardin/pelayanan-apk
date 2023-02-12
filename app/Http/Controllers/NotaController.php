@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nota;
 use Illuminate\Http\Request;
+use App\Http\Requests\NotaRequest;
+use Carbon\Carbon;
 
 class NotaController extends Controller
 {
@@ -32,9 +35,21 @@ class NotaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NotaRequest $request)
     {
-        //
+        
+       
+        
+        Nota::create([
+            'jenis' => $request->jenis,
+            'nama_barang' => $request->nama_barang,
+            'keterangan' => $request->keterangan,
+            'pelanggan_id' => $request->pelanggan_id,
+            'status' => 'BS'
+        ]);
+
+        $pesan = "Nota telah dibuat";
+        return redirect()->route('workit.pelayanan')->with('pesan', $pesan);
     }
 
     /**

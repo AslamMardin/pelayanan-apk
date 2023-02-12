@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notas', function (Blueprint $table) {
+        Schema::create('log_aktif', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis', ['Hp', 'Printer', 'Leptop', 'Bimbel'])->default('Leptop');
-            $table->string('nama_barang');
-            $table->string('keterangan');
-            $table->foreignId('pelanggan_id')
-            ->constrained()
-            ->onDelete('cascade');
-            $table->enum('status', ['BS', 'S'])->default('BS');
+            $table->text('keterangan');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notas');
+        Schema::dropIfExists('log_aktif');
     }
 };
