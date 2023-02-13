@@ -2,6 +2,18 @@
 
 @section('judul_halaman', 'DASHBOARD')
 @section('top-main')
+<div class="row bg-white shadow-sm mb-2 p-1">
+  <div class="cold-sm-12 col-md-12">
+    <div class="form-group col-md-2">
+      <label>Bulan :</label>
+      <select class="form-control">
+      @for ($i = 1; $i <= 12; $i++)
+          <option value="{{$i}}">{{$i}} Bulan</option>
+      @endfor
+      </select>
+    </div>
+  </div>
+</div>
  <!-- Small boxes (Stat box) -->
  <div class="row">
     <div class="col-lg-3 col-6">
@@ -22,7 +34,7 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>{{count($notas)}}</h3>
+          <h3>{{count($com_notas)}}</h3>
 
           <p>Pelayanan</p>
         </div>
@@ -73,7 +85,7 @@
       {{-- card panel nota --}}
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Nota</h4>
+          <h4 class="card-title"><b>Untung :</b> @currency($com_total_pemasukan - $com_total_pengeluran)</h4>
         </div>
         <div class="card-body">
           {{-- mulai nota --}}
@@ -102,7 +114,7 @@
               <div class="info-box m-1 bg-{{$type}}">
                 <div class="info-box-content">
                   <div class="row" style="display: flex; justify-content: space-between; font-size: 14px">
-                    <small class="text-left">{{$item->created_at->diffForHumans()}} <br> G:{{$item->notaDetail->garansi}} </small>
+                    <small class="text-left">{{$item->created_at->diffForHumans()}} <br> @if(!empty($item->notaDetail->garansi)) G: {{$item->notaDetail->garansi}} @endif </small>
                     <small class="text-right" style="font-size: 11px">{{$item->created_at->format('d/m/Y')}}</small>
                   </div>
                   <div class="row py-1" style="border-bottom:1px dashed #000;border-top:1px dashed #000">

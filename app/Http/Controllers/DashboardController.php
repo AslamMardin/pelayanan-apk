@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BayarRequest;
 use App\Models\Nota;
 use App\Models\LogAktif;
 use App\Models\NotaDetail;
@@ -27,7 +28,7 @@ class DashboardController extends Controller
     }
 
 
-    public function bayar(Request $request,$id)
+    public function bayar(BayarRequest $request,$id)
     {
        
         $nota = Nota::where('id',$id)->first();

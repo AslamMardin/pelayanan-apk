@@ -11,7 +11,7 @@
 
             <div class="mb-3">
                <label for="nama" class="form-label">Nama</label>
-               <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}">
+               <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" autocomplete="off" value="{{old('nama')}}">
                @error('nama')
                <div class="text-danger text-sm m-1">{{ $message }}</div>
                @enderror
@@ -19,7 +19,7 @@
 
             <div class="mb-3">
                <label for="nomor" class="form-label">No Telpon</label>
-               <input type="text" name="nomor" class="form-control @error('nomor') is-invalid @enderror" value="{{old('nomor')}}">
+               <input type="text" name="nomor" class="form-control @error('nomor') is-invalid @enderror" autocomplete="off" value="{{old('nomor')}}">
                @error('nomor')
                <div class="text-danger text-sm m-1">{{ $message }}</div>
                @enderror
@@ -27,7 +27,7 @@
 
             <div class="mb-3">
                <label for="alamat" class="form-label">Alamat</label>
-               <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{old('alamat')}}">
+               <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" autocomplete="off" value="{{old('alamat')}}">
                @error('alamat')
                <div class="text-danger text-sm m-1">{{ $message }}</div>
                @enderror

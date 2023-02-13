@@ -22,7 +22,8 @@ class WorkitComposer
        $pelanggans = Pelanggan::all();
        $view->with('com_pelanggans', $pelanggans);
 
-      
+       $notas = Nota::all();
+       $view->with('com_notas', $notas);
 
        $view->with('com_total_pengeluran', collect(NotaDetail::all())->sum('pengeluaran'));
        $view->with('com_total_pemasukan', collect(NotaDetail::all())->sum('pemasukan'));

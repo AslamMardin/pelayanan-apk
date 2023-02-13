@@ -18,7 +18,7 @@
              </div>
 
             <div class="mb-3">
-               <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
+               <label for="pengeluaran" class="form-label">Harga Pengeluaran Beli Barang </label>
                <input type="text" name="pengeluaran" class="form-control @error('pengeluaran') is-invalid @enderror" value="{{ $nota->notaDetail->pengeluaran ?? old('pengeluaran')}}" id="rupiah1">
                <div class="text-success text-sm m-1" id="labelPengeluaran"></div>
                @error('pengeluaran')
@@ -27,7 +27,7 @@
             </div>
             
             <div class="mb-3">
-               <label for="pemasukan" class="form-label">Jumlah Pemasukan</label>
+               <label for="pemasukan" class="form-label">Total Bayar</label>
                <input type="text" name="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" value="{{$nota->notaDetail->pemasukan ?? old('pemasukan')}}" id="rupiah2">
                <div class="text-success text-sm m-1" id="labelPemasukan"></div>
                @error('pemasukan')
