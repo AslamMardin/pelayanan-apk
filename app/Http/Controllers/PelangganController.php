@@ -26,6 +26,7 @@ class PelangganController extends Controller
     public function create()
     {
         //
+        
         $jk = ['laki-laki', 'perempuan'];
         return view('pelanggan.create', [
             'jk' => $jk

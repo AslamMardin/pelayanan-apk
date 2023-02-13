@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($com_pelanggans as $pelanggan)
+                @forelse ($com_pelanggans as $pelanggan)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{ $pelanggan->nama }}</td>
@@ -52,7 +52,11 @@
                       </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                  <td colspan="5"><h3 class="text-muted text-center">DATA PELANGGAN BELUM ADA</h3></td>
+                </tr>
+                @endforelse
             </tbody>
           </table>
         
