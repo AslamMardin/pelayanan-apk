@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('notas', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->string('jenis');
-            $table->date('garansi');
-            $table->enum('status', ['BS', 'S'])->default('BS');
+            $table->enum('jenis', ['Hp', 'Printer', 'Leptop', 'Bimbel'])->default('Leptop');
+            $table->string('nama_barang');
+            $table->string('keterangan');
             $table->foreignId('pelanggan_id')
             ->constrained()
             ->onDelete('cascade');
+            $table->enum('status', ['BS', 'S'])->default('BS');
             $table->timestamps();
         });
     }

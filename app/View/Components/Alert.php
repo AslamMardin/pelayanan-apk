@@ -12,10 +12,12 @@ class Alert extends Component
      * @return void
      */
     public $type;
-    public function __construct($type = "success")
+    public $message;
+    public function __construct($type = "success", $message = "your text")
     {
         //
         $this->type = $type;
+        $this->message = $message;
     }
 
     /**
@@ -25,6 +27,9 @@ class Alert extends Component
      */
     public function render()
     {
-        return view('components.alert');
+        return view('components.alert', [
+            'type' => $this->type,
+            'message' => $this->message
+        ]);
     }
 }

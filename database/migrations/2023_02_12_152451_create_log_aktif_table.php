@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nota_details', function (Blueprint $table) {
+        Schema::create('log_aktif', function (Blueprint $table) {
             $table->id();
-            $table->date('garansi');
-            $table->float('pemasukan', 12, 0)->default(0);
-            $table->float('pengeluaran', 12, 0)->default(0);
-            $table->foreignId('nota_id')
-            ->constrained()
-            ->onDelete('cascade');
+            $table->text('keterangan');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nota_details');
+        Schema::dropIfExists('log_aktif');
     }
 };

@@ -20,7 +20,7 @@ class PelangganSeeder extends Seeder
             'nama' => 'aslam mardin',
             'nomor' => '085825587404',
             'alamat' => 'bonde campalagian',
-            'jenis_kelamin' => 'Laki-Laki'
+            'jenis_kelamin' => 'L'
         ]);
     }
 }

@@ -6,6 +6,8 @@
   <title>{{ $apk_name}}</title>
 
   @include('layouts.pages.link')
+
+  @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -121,5 +123,6 @@
 <!-- ./wrapper -->
 
 @include('layouts.pages.footer')
+@stack('js')
 </body>
 </html>

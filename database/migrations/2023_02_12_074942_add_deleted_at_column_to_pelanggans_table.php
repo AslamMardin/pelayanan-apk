@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pelanggans', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('nomor')->default('-');
-            $table->text('alamat')->default('-');
-            $table->enum('jenis_kelamin', ['L', 'P'])->default('L');
-            $table->timestamps();
-        
+        Schema::table('pelanggans', function (Blueprint $table) {
+            //
+            $table->softDeletes();
         });
     }
 
@@ -31,7 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-       
-        Schema::dropIfExists('pelanggans');
+        Schema::table('pelanggans', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

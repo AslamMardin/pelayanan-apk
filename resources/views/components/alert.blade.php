@@ -1,5 +1,5 @@
 <div>
     <div class="alert alert-{{$type}} m3" role="alert">
-       {{$slot}}
+      {{$message}}
       </div>
 </div>
