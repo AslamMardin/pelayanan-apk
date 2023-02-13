@@ -99,6 +99,7 @@
                 <th>Tanggal</th>
                 <th>Garansi</th>
                 <th style="width: 40px">Aksi</th>
+                <th style="width: 40px">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -128,22 +129,32 @@
                 </td>
                 <td>
                   <b style="font-size:14px">{{$item->pelanggan->nama}}</b>
-                  <span style="display: block; font-size: 12px">
+                  <span style="display: block; font-size: 13px">
                     {{$item->keterangan}}
                     </span>
                 </td>
                 <td>{{$item->created_at->diffForHumans() }}</td>
-                <td>@if(!empty($item->notaDetail->garansi)) G: {{$item->notaDetail->garansi}} @endif</td>
+                <td>{{$item->notaDetail->label_garansi  ?? "-"}} Bulan</td>
               
                 <td>
                   <div class="btn-group">
-                    <a href="#" class="btn btn-sm btn-info">
+                    <a href="{{route('dashboard.show', ['id' => $item->id])}}" class="btn btn-sm btn-info">
                       <i class="ion ion-eye"></i>
                     </a>
                     <a href="{{route('dashboard.input.bayar', ['id' => $item->id])}}" class="btn btn-sm btn-warning">
                       <i class="ion ion-card"></i>
                     </a>
+                    <a href="" class="btn btn-sm btn-danger">
+                      <i class="bi bi-trash-fill"></i>
+                    </a>
                   </div>
+                </td>
+                <td align="center">
+                  @if ($item->status == "BS")
+                  <i class="bi bi-circle text-danger"></i>
+                  @else
+                  <i class="bi bi-check-circle-fill text-success"></i>
+                  @endif
                 </td>
               </tr>
               
@@ -192,6 +203,4 @@
     </div>
   </div>
 @endsection
-@section('main')
-    
-@endsection
+
