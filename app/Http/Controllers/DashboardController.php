@@ -38,7 +38,10 @@ class DashboardController extends Controller
 
     public function bayar(BayarRequest $request,$id)
     {
-       
+    //    if(empty($request->garansi))
+    //    {
+    //     $request['garansi'] = 2;
+    //    }
         $nota = Nota::where('id',$id)->first();
         $cek = Nota::findOrFail($id)->notaDetail;
         if(!$cek)
