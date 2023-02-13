@@ -13,35 +13,37 @@
                 <input type="text" name="id_nota" class="form-control @error('id_nota') is-invalid @enderror" value="{{$nota->id}}" readonly>
                 <div class="text-danger text-sm m-1">
                     <b>Nota : </b>
-                    {{$nota->pelanggan->nama}} - {{$nota->nama_barang}}
+                    {{$nota->nama_barang}} - {{$nota->keterangan}}
                 </div>
              </div>
 
             <div class="mb-3">
                <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
-               <input type="text" name="pengeluaran" class="form-control @error('pengeluaran') is-invalid @enderror" value="{{old('pengeluaran')}}" id="rupiah1">
+               <input type="text" name="pengeluaran" class="form-control @error('pengeluaran') is-invalid @enderror" value="{{ $nota->notaDetail->pengeluaran ?? old('pengeluaran')}}" id="rupiah1">
+               <div class="text-success text-sm m-1" id="labelPengeluaran"></div>
                @error('pengeluaran')
                <div class="text-danger text-sm m-1">{{ $message }}</div>
                @enderror
             </div>
-
+            
             <div class="mb-3">
                <label for="pemasukan" class="form-label">Jumlah Pemasukan</label>
-               <input type="text" name="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" value="{{old('pemasukan')}}" id="rupiah2">
+               <input type="text" name="pemasukan" class="form-control @error('pemasukan') is-invalid @enderror" value="{{$nota->notaDetail->pemasukan ?? old('pemasukan')}}" id="rupiah2">
+               <div class="text-success text-sm m-1" id="labelPemasukan"></div>
                @error('pemasukan')
                <div class="text-danger text-sm m-1">{{ $message }}</div>
                @enderror
             </div>
 
             
-
+            
             <div>
                <label for="garansi" class="form-label">Garansi</label>
                <select class="custom-select form-control-border border-width-2 @error('garansi') is-invalid @enderror" name="garansi" id="garansi">
-                 <option value="#">Pilih Item..</option>
-                 @for ($i = 1; $i <= 12; $i++)
-                 <option value="{{$i}}">{{$i}}</option>
-                @endfor
+                  <option value="#">Pilih Item..</option>
+                  @for ($i = 1; $i <= 12; $i++)
+                  <option @selected(($nota->notaDetail->label_garansi ?? old('garansi')) == $i) value="{{$i}}">{{$i}}</option>
+                  @endfor
                </select>
                @error('garansi')
                      <div class="text-danger text-sm m-1">{{ $message }}</div>
@@ -60,14 +62,20 @@
 @endsection
 
 
-{{-- @push('js')
+@push('js')
 <script type="text/javascript">
 		
    var rupiah1 = document.getElementById('rupiah1');
+   var labelPengeluaran = document.getElementById('labelPengeluaran');
+   var labelPemasukan = document.getElementById('labelPemasukan');
    rupiah1.addEventListener('keyup', function(e){
       // tambahkan 'Rp.' pada saat form di ketik
       // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-      rupiah1.value = formatRupiah(this.value);
+      if(this.value == ""){
+         labelPengeluaran.innerHTML = "";
+      }else {
+         labelPengeluaran.innerHTML = "Pengeluran " + formatRupiah(this.value, 'Rp. ');
+      }
    });
 
 
@@ -75,7 +83,12 @@
    rupiah2.addEventListener('keyup', function(e){
       // tambahkan 'Rp.' pada saat form di ketik
       // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-      rupiah2.value = formatRupiah(this.value);
+      if(this.value == ""){
+         labelPemasukan.innerHTML = "";
+      }else {
+         labelPemasukan.innerHTML = "Pemasukan " + formatRupiah(this.value, 'Rp. ');
+      }
+      
    });
 
    /* Fungsi formatRupiah */
@@ -96,4 +109,4 @@
       return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
    }
 </script>
-@endpush --}}
+@endpush

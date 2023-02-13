@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $notas = Nota::latest()->get();
+        $notas = Nota::with('notaDetail')->latest()->get();
         $logs = LogAktif::latest()->limit(8)->get();
         return view('workit.dashboard', [
             'notas' => $notas,
@@ -22,30 +22,34 @@ class DashboardController extends Controller
 
     public function inputBayar($id)
     {
-        $nota = Nota::findOrFail($id);
+        $nota = Nota::with('notaDetail')->findOrFail($id);
         return view('dashboard.input_bayar', ['nota' => $nota]);
     }
 
+
     public function bayar(Request $request,$id)
     {
-        $request['garansi'] = Carbon::now()->addMonth($request->garansi)->format('Y-m-d');
-
-
-        $nota = Nota::with('notaDetail')->findOrFail($id);
-        if($nota->notaDetail == null){
-            $nota->notaDetail()->save(new NotaDetail([
+       
+        $nota = Nota::where('id',$id)->first();
+        $cek = Nota::findOrFail($id)->notaDetail;
+        if(!$cek)
+        {
+            $nota->notaDetail()->create([
                 'pengeluaran' => $request->pengeluaran,
                 'pemasukan' => $request->pemasukan,
-                'garansi' => $request->garansi
-            ]));
+                'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
+                'label_garansi' => $request->garansi
+            ]);
+            
         }else {
-            $nota->notaDetail->update([
-                'pengeluaran' => $request->pengeluaran,
-                'pemasukan' => $request->pemasukan,
-                'garansi' => $request->garansi
+            
+            $nota->notaDetail()->update([
+                    'pengeluaran' => $request->pengeluaran,
+                    'pemasukan' => $request->pemasukan,
+                    'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
+                    'label_garansi' => $request->garansi
             ]);
         }
-
         return redirect()->route('workit.dashboard');
     }
 }

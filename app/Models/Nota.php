@@ -26,7 +26,7 @@ class Nota extends Model
     protected static function booted()
     {
         static::created(function ($nota) {
-            $message = "Nota {$nota->pelanggan->nama} telah Dibuat";
+            $message = "Nota {$nota->nama_barang} - {$nota->pelanggan->nama} telah Dibuat";
             LogAktif::create(['keterangan' => $message]);
         });
     }

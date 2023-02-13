@@ -9,5 +9,5 @@ class NotaDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['garansi', 'pemasukan', 'pengeluaran', 'nota_id'];
+    protected $fillable = ['garansi', 'pemasukan', 'pengeluaran', 'nota_id', 'label_garansi'];
 }

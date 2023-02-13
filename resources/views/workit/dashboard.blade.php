@@ -22,7 +22,7 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>0</h3>
+          <h3>{{count($notas)}}</h3>
 
           <p>Pelayanan</p>
         </div>
@@ -37,7 +37,7 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>0</h3>
+          <h3>@currency($com_total_pemasukan)</h3>
 
           <p>Pemasukan</p>
         </div>
@@ -52,7 +52,7 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3>0</h3>
+          <h3>@currency($com_total_pengeluran)</h3>
 
           <p>Pengeluaran</p>
         </div>
@@ -101,8 +101,8 @@
             <div class="col-12 col-sm-6 col-md-4">
               <div class="info-box m-1 bg-{{$type}}">
                 <div class="info-box-content">
-                  <div class="row" style="display: flex; justify-content: space-between; font-size: 13px">
-                    <small class="text-right">{{$item->created_at->diffForHumans()}}</small>
+                  <div class="row" style="display: flex; justify-content: space-between; font-size: 14px">
+                    <small class="text-left">{{$item->created_at->diffForHumans()}} <br> G:{{$item->notaDetail->garansi}} </small>
                     <small class="text-right" style="font-size: 11px">{{$item->created_at->format('d/m/Y')}}</small>
                   </div>
                   <div class="row py-1" style="border-bottom:1px dashed #000;border-top:1px dashed #000">
@@ -156,7 +156,7 @@
         <div class="card-body">
             @foreach ($logs as $item)
                 <small>
-                  <b class="text-danger fw-bold d-block">{{$item->created_at->format('Y/m/d H:i:s')}}</b>
+                  <b class="text-danger fw-bold d-block">{{$item->created_at->diffForHumans()}}</b>
                   {{$item->keterangan}}
                 </small><hr>
             @endforeach
