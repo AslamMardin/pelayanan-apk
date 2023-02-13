@@ -88,11 +88,21 @@
           <h4 class="card-title"><b>Untung :</b> @currency($com_total_pemasukan - $com_total_pengeluran)</h4>
         </div>
         <div class="card-body">
-          {{-- mulai nota --}}
-           
 
-          <div class="row">
-            @forelse ($notas as $item)
+
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Barang</th>
+                <th>Nota</th>
+                <th>Tanggal</th>
+                <th>Garansi</th>
+                <th style="width: 40px">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @forelse ($notas as $item)
               @php
               if($item->jenis == "Leptop"){
                 $type = "danger";
@@ -109,42 +119,44 @@
                 } 
               
               @endphp
-            <!-- .col -->
-            <div class="col-12 col-sm-6 col-md-4">
-              <div class="info-box m-1 bg-{{$type}}">
-                <div class="info-box-content">
-                  <div class="row" style="display: flex; justify-content: space-between; font-size: 14px">
-                    <small class="text-left">{{$item->created_at->diffForHumans()}} <br> @if(!empty($item->notaDetail->garansi)) G: {{$item->notaDetail->garansi}} @endif </small>
-                    <small class="text-right" style="font-size: 11px">{{$item->created_at->format('d/m/Y')}}</small>
-                  </div>
-                  <div class="row py-1" style="border-bottom:1px dashed #000;border-top:1px dashed #000">
-                    <span class="info-box-text" style="font-size: 12px; font-weight:bold">{{ $item->nama_barang }} - {{$item->keterangan}}</span>
-                  </div>
-                  <div class="row" style="font-size: 15px;">
-                    <small>{{ $item->pelanggan->nama }}</small>
-                    
-                  </div>
-                  <div class="btn-group mt-2" style="display: flex; justify-content: space-between">
-                    <a href="#" class="text-white">
+              <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>
+                  <span class="badge bg-{{$type}}">
+                    {{$item->nama_barang}}
+                  </span>
+                </td>
+                <td>
+                  <b style="font-size:14px">{{$item->pelanggan->nama}}</b>
+                  <span style="display: block; font-size: 12px">
+                    {{$item->keterangan}}
+                    </span>
+                </td>
+                <td>{{$item->created_at->diffForHumans() }}</td>
+                <td>@if(!empty($item->notaDetail->garansi)) G: {{$item->notaDetail->garansi}} @endif</td>
+              
+                <td>
+                  <div class="btn-group">
+                    <a href="#" class="btn btn-sm btn-info">
                       <i class="ion ion-eye"></i>
                     </a>
-                    <a href="{{route('dashboard.input.bayar', ['id' => $item->id])}}" class="text-white">
+                    <a href="{{route('dashboard.input.bayar', ['id' => $item->id])}}" class="btn btn-sm btn-warning">
                       <i class="ion ion-card"></i>
                     </a>
                   </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.col -->
-            @empty
-            <h3 class="text-center text-muted">Nota Belum ada!</h3>
-            @endforelse
-            
-          </div>
+                </td>
+              </tr>
+              
+              @empty
+                  <tr>
+                    <td colspan="5">Kosong</td>
+                  </tr>
+              @endforelse
+            </tbody>
+          </table>
 
 
-
-          {{-- ./ mulai nota --}}
+        
         </div>
         <div class="card-footer">
           <b>Ket :</b>
