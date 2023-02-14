@@ -27,14 +27,7 @@ class DashboardController extends Controller
         return view('dashboard.input_bayar', ['nota' => $nota]);
     }
 
-    public function show($id)
-    {
-        $nota = Nota::with('pelanggan', 'notaDetail')->where('id', $id)->first();
-        return view('dashboard.show', [
-            'nota' => $nota
-        ]);
-    }
-
+    
 
     public function bayar(BayarRequest $request,$id)
     {

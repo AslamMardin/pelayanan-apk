@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('workit.dashboard');
 Route::get('/dashboard/{id}', [DashboardController::class, 'inputBayar'])->name('dashboard.input.bayar');
-Route::get('/dashboard/show/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
+
 Route::post('/dashboard/bayar/{id}', [DashboardController::class, 'bayar'])->name('dashboard.bayar');
 
 Route::prefix('/workit')->group(function(){

@@ -58,9 +58,12 @@ class NotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($notum)
     {
-        //
+        $nota = Nota::with('pelanggan', 'notaDetail')->where('id', $notum)->first();
+        return view('dashboard.show', [
+            'nota' => $nota
+        ]);
     }
 
     /**
@@ -92,8 +95,11 @@ class NotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($notum)
     {
-        //
+       $nota =  Nota::findOrFail($notum);
+       $nota->delete();
+       $pesan = "{$nota->nama_barang} - {$nota->pelanggan->nama} telah dihapus";
+        return redirect()->route('workit.dashboard')->with('pesan', $pesan);
     }
 }

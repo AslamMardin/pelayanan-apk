@@ -12,11 +12,5 @@ class Pelanggan extends Model
 
     protected $guarded = [];
 
-    protected static function booted()
-    {
-        static::created(function ($pelanggan) {
-            $message = "Pelanggan $pelanggan->nama telah ditambahkan";
-            LogAktif::create(['keterangan' => $message]);
-        });
-    }
+   
 }

@@ -11,6 +11,7 @@ class Nota extends Model
 {
     use HasFactory;
     protected $guarded = [];
+   
 
     public function pelanggan()
     {

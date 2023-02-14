@@ -89,7 +89,11 @@
         </div>
         <div class="card-body">
 
-
+          @if(session()->has('pesan'))
+          <div class="alert alert-success m3" role="alert">
+             {{session()->get('pesan')}}
+          </div>
+          @endif
           <table class="table table-sm">
             <thead>
               <tr>
@@ -138,15 +142,20 @@
               
                 <td>
                   <div class="btn-group">
-                    <a href="{{route('dashboard.show', ['id' => $item->id])}}" class="btn btn-sm btn-info">
+                    <a href="{{route('nota.show', ['notum' => $item->id])}}" class="btn btn-sm btn-info">
                       <i class="ion ion-eye"></i>
                     </a>
                     <a href="{{route('dashboard.input.bayar', ['id' => $item->id])}}" class="btn btn-sm btn-warning">
-                      <i class="ion ion-card"></i>
+                      <i class="bi bi-currency-exchange"></i>
                     </a>
-                    <a href="" class="btn btn-sm btn-danger">
-                      <i class="bi bi-trash-fill"></i>
-                    </a>
+                    <form method="post" action="{{route('nota.destroy',['notum' => $item->id])}}">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda Akan menghapus Nota {{$item->nama_barang}} - {{$item->pelanggan->nama}}')">
+                        <i class="bi bi-clipboard-x-fill"></i>
+                      </button>
+                    </form>
+                   
                   </div>
                 </td>
                 <td align="center">
