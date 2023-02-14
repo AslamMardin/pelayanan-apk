@@ -1,10 +1,11 @@
 <?php
-
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NotaController;
-use App\Http\Controllers\PelangganController;
 use App\Models\Pelanggan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('workit.dashboard');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+
+///auth
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('workit.dashboard');
 Route::get('/dashboard/{id}', [DashboardController::class, 'inputBayar'])->name('dashboard.input.bayar');
 
 Route::post('/dashboard/bayar/{id}', [DashboardController::class, 'bayar'])->name('dashboard.bayar');
@@ -63,3 +83,14 @@ Route::resource('/pelanggan', PelangganController::class);
 
 Route::get('/nota/excel', [NotaController::class, 'excel']);
 Route::resource('/nota', NotaController::class);
+
+  Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+});
+
+
+
+require __DIR__.'/auth.php';

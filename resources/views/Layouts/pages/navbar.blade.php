@@ -43,7 +43,16 @@
           </li>
         </ul>
       </li>
-        
+
+      <li class="nav-header">Options</li>
+      <li class="nav-item">
+        <a href="{{route('register')}}" class="nav-link">
+          <i class="nav-icon bi bi-person-fill-lock"></i>
+          <p>
+            Akun
+          </p>
+        </a>
+      </li>
   
     </ul>
   </nav>

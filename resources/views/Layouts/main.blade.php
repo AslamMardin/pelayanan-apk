@@ -36,18 +36,27 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="bi bi-person-bounding-box"></i>
+          <i class="bi bi-person-bounding-box"></i> 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Informasi Akun</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fa fa-sign-out mr-2"></i> Aslam Mardin
+             {{Auth::user()->name}}
             <span class="float-right text-success text-sm">Admin</span>
+          </a>
+          <a href="#" class="dropdown-item">
+             {{Auth::user()->email}}
+            <span class="float-right text-success text-sm">Email</span>
           </a>
           
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Keluar</a>
+           <!-- Authentication -->
+          <form method="POST" action="{{ route('logout') }}">
+              @csrf
+            <button type="submit" class="dropdown-item dropdown-footer">Keluar</button>
+          </form>
+         
         </div>
       </li>
       
