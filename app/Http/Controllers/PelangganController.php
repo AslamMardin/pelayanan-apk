@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PelangganRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use App\Models\Pelanggan;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Exports\PelanggansExport;
+use App\Http\Requests\PelangganRequest;
+use Illuminate\Support\Facades\Validator;
+
 class PelangganController extends Controller
 {
     /**
@@ -142,5 +145,11 @@ class PelangganController extends Controller
         $pelanggan = Pelanggan::withTrashed()->findOrFail($id);
         $pelanggan->restore();
         return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil di restore");
+    }
+
+    public function export()
+    {
+        // return Pelanggan::download(new PelanggansExport, 'pelanggan-'.Carbon::now()->timestamp.'.xlsx');
+        return (new PelanggansExport)->download('pelanggan-'.Carbon::now()->timestamp.'.xlsx');
     }
 }

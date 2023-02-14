@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NotasExport;
 use App\Models\Nota;
 use Illuminate\Http\Request;
 use App\Http\Requests\NotaRequest;
@@ -102,4 +103,11 @@ class NotaController extends Controller
        $pesan = "{$nota->nama_barang} - {$nota->pelanggan->nama} telah dihapus";
         return redirect()->route('workit.dashboard')->with('pesan', $pesan);
     }
+
+    public function excel()
+    {
+        // return Nota::download(new NotasExport, 'nota'.Carbon::now()->timestamp.'.xlsx');
+
+        return (new NotasExport)->status('S')->download('nota-'.Carbon::now()->timestamp.'.xlsx');  
+      }
 }

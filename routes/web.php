@@ -53,6 +53,7 @@ Route::prefix('/workit')->group(function(){
 
 
 Route::get('/pelanggan/sampah', [PelangganController::class, 'sampah'])->name('pelanggan.sampah');
+Route::get('/pelanggan/export', [PelangganController::class, 'export']);
 Route::get('/pelanggan/restore/{id}', [PelangganController::class, 'restore'])->name('pelanggan.restore');
 Route::delete('/pelanggan/hapus/{id}', [PelangganController::class, 'hapus'])->name('pelanggan.hapus');
 Route::resource('/pelanggan', PelangganController::class);
@@ -60,4 +61,5 @@ Route::resource('/pelanggan', PelangganController::class);
 
 
 
+Route::get('/nota/excel', [NotaController::class, 'excel']);
 Route::resource('/nota', NotaController::class);

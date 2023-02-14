@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $notas = Nota::with('notaDetail')->latest()->get();
+        $notas = Nota::with('notaDetail')->latest()->paginate();
         $logs = LogAktif::latest()->limit(8)->get();
         return view('workit.dashboard', [
             'notas' => $notas,

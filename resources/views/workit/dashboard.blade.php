@@ -84,8 +84,11 @@
     <div class="col-sm-12 col-md-9">
       {{-- card panel nota --}}
       <div class="card">
-        <div class="card-header">
+        <div class="card-header ">
           <h4 class="card-title"><b>Untung :</b> @currency($com_total_pemasukan - $com_total_pengeluran)</h4>
+          <div class="card-tools">
+            <a href="/nota/excel" class="btn btn-sm btn-success"><i class="bi bi-filetype-xlsx"></i> Elsx</a>
+          </div>
         </div>
         <div class="card-body">
 
@@ -175,7 +178,7 @@
             </tbody>
           </table>
 
-
+          {!! $notas->links() !!}
         
         </div>
         <div class="card-footer">
