@@ -15,7 +15,7 @@ class NotaObserver
      */
     public function created(Nota $nota)
     {
-        $message = "Pelanggan {$nota->nama_barang} - {$nota->pelanggan->nama} telah ditambahkan";
+        $message = "Nota {$nota->nama_barang} - {$nota->pelanggan->nama} telah ditambahkan";
         LogAktif::create(['keterangan' => $message]);
     }
 
@@ -38,7 +38,7 @@ class NotaObserver
      */
     public function deleted(Nota $nota)
     {
-        $message = "Pelanggan {$nota->nama_barang} - {$nota->pelanggan->nama} telah dihapus";
+        $message = "Nota {$nota->nama_barang} - {$nota->pelanggan->nama} telah dihapus";
         LogAktif::create(['keterangan' => $message]);
     }
 

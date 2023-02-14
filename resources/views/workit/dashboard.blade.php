@@ -86,7 +86,7 @@
 
 
   <div class="row">
-    <div class="col-sm-12 col-md-10">
+    <div class="col-sm-12 col-md-9">
       {{-- card panel nota --}}
       <div class="card">
         <div class="card-header ">
@@ -101,7 +101,7 @@
           <table class="table table-sm" id="myTable">
             <thead>
               <tr>
-                <th style="width: 10px">#</th>
+                <th>#</th>
                 <th>Barang</th>
                 <th>Nota</th>
                 <th>Tanggal</th>
@@ -129,7 +129,7 @@
               
               @endphp
               <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$item->created_at->format('d-m-Y')}}</td>
                 <td>
                   <span class="badge bg-{{$type}}">
                     {{$item->nama_barang}}
@@ -194,7 +194,7 @@
       </div>
       {{-- ./ card panel nota --}}
     </div>
-    <div class="col-sm-12 col-md-2">
+    <div class="col-sm-12 col-md-3">
        <!-- general form elements disabled -->
        <div class="card card-warning">
         <div class="card-header">

@@ -32,11 +32,22 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('pengaturan')}}" role="button">
+          {{$com_nama_bulan[$com_bulan - 1] ?? "semua"}}
+          <i class="bi bi-funnel-fill"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" role="button">
+          {{ date('d-M-Y ') }}  
+          <i class="bi bi-calendar3"></i>
+        </a>
+      </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          {{ date('d-M-Y ') }}  
+        
               <i class="bi bi-person-bounding-box"></i> 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
