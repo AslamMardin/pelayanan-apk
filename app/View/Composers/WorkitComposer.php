@@ -3,9 +3,10 @@
 namespace App\View\Composers;
  
 use App\Models\Nota;
-use App\Models\NotaDetail;
 use App\Models\Pelanggan;
 use Illuminate\View\View;
+use App\Models\NotaDetail;
+use Illuminate\Http\Request;
  
 class WorkitComposer
 {
@@ -19,13 +20,9 @@ class WorkitComposer
      */
     public function compose(View $view)
     {
+       
        $pelanggans = Pelanggan::all();
        $view->with('com_pelanggans', $pelanggans);
 
-       $notas = Nota::all();
-       $view->with('com_notas', $notas);
-
-       $view->with('com_total_pengeluran', collect(NotaDetail::all())->sum('pengeluaran'));
-       $view->with('com_total_pemasukan', collect(NotaDetail::all())->sum('pemasukan'));
     }
 }

@@ -2,29 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BayarRequest;
 use App\Models\Nota;
 use App\Models\LogAktif;
+use App\Models\Pelanggan;
 use App\Models\NotaDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Http\Requests\BayarRequest;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $notas = Nota::with('notaDetail')->latest()->paginate();
+        if($request->has('bulan_filter'))
+        {
+            $pelanggans = Pelanggan::whereMonth('created_at', $request->get('bulan_filter'))->get();
+            $notas = Nota::with('notaDetail')->whereMonth('created_at', $request->get('bulan_filter'))->latest()->paginate();
+            $notaDetail = NotaDetail::whereMonth('created_at', $request->get('bulan_filter'))->get(['pemasukan', 'pengeluaran']);
+        }
+        else
+        {
+            $pelanggans = Pelanggan::all();
+            $notas = Nota::with('notaDetail')->latest()->paginate();
+            $notaDetail = NotaDetail::get(['pemasukan', 'pengeluaran']);
+        }
+        
+        $total_pemasukan = collect($notaDetail)->sum('pemasukan');
+        $total_pengeluaran = collect($notaDetail)->sum('pengeluaran');
+        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $logs = LogAktif::latest()->limit(8)->get();
+
         return view('workit.dashboard', [
             'notas' => $notas,
-            'logs' => $logs
+            'logs' => $logs,
+            'pelanggans' => $pelanggans,
+            'total_pemasukan' => $total_pemasukan,
+            'total_pengeluaran' => $total_pengeluaran,
+            'bulan' => $bulan
         ]);
     }
 
     public function inputBayar($id)
     {
         $nota = Nota::with('notaDetail')->findOrFail($id);
-        return view('dashboard.input_bayar', ['nota' => $nota]);
+        return view('dashboard.input_bayar', [
+            'nota' => $nota
+        ]);
     }
 
     

@@ -1,7 +1,52 @@
 @extends('layouts.main')
 
-@section('judul_halaman', 'PEMASUKAN')
 
 @section('main')
-    <h3>halaman pemasukan</h3>
+    
+<div class="card p-3">
+    <div class="card-header border-0">
+      <h3 class="card-title">DAFTAR PEMASUKAN</h3>
+      <div class="card-tools">
+        <a href="/pemasukan/export" class="btn btn-success btn-sm">
+          <i class="bi bi-filetype-xlsx"></i> Xlsx
+        </a>
+      </div>
+    </div>
+    <div class="card-body table-responsive p-0">
+
+     
+        <table class="table table-hover" id="myTable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">NAMA BARANG</th>
+                <th scope="col">KETERANGAN</th>
+                <th scope="col">RUPIAH</th>
+              </tr>
+            </thead>
+            <tbody>
+                @forelse ($notaDetails as $item)
+                <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{ $item->nota->nama_barang }}</td>
+                    <td>{{ $item->nota->keterangan }}</td>
+                    <td>@currency($item->pemasukan)</td>
+                </tr>
+                @empty
+                <tr>
+                  <td colspan="4"><h3 class="text-muted text-center">PEMASUKAN BELUM ADA</h3></td>
+                </tr>
+                @endforelse
+                <tr class="bg-secondary">
+                    <td colspan="3" align="left">Total Pemasukan</td>
+                    <td>@currency($total_pemasukan)</td>
+                </tr>
+            </tbody>
+          </table>
+        
+        
+    </div>
+   
+  </div>
+  <!-- /.card -->
 @endsection

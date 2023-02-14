@@ -49,7 +49,7 @@
         <a href="{{route('register')}}" class="nav-link">
           <i class="nav-icon bi bi-person-fill-lock"></i>
           <p>
-            Akun
+            Buat Akun
           </p>
         </a>
       </li>

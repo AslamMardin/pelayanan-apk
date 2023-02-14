@@ -4,14 +4,19 @@
 @section('top-main')
 <div class="row bg-white shadow-sm mb-2 p-1">
   <div class="cold-sm-12 col-md-12">
-    <div class="form-group col-md-2">
+    <form action="{{route('workit.dashboard')}}" method="get">
       <label>Bulan :</label>
-      <select class="form-control">
-      @for ($i = 1; $i <= 12; $i++)
-          <option value="{{$i}}">{{$i}} Bulan</option>
-      @endfor
-      </select>
-    </div>
+        <div class="input-group col-md-2">
+          <select class="form-control" name="bulan_filter">
+            <option value="all">Semua</option>
+          @for ($i = 0; $i < 12; $i++)
+              <option value="{{$i+1}}">{{$bulan[$i]}}</option>
+          @endfor
+          </select>
+          <button type="submit" class="btn btn-secondary">Filter</button>
+        </div>
+    
+    </form>
   </div>
 </div>
  <!-- Small boxes (Stat box) -->
@@ -20,7 +25,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>{{count($com_pelanggans)}}</h3>
+          <h3>{{count($pelanggans)}}</h3>
 
           <p>Pelanggan</p>
         </div>
@@ -34,7 +39,7 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>{{count($com_notas)}}</h3>
+          <h3>{{count($notas)}}</h3>
 
           <p>Pelayanan</p>
         </div>
@@ -49,7 +54,7 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>@currency($com_total_pemasukan)</h3>
+          <h3>@currency($total_pemasukan)</h3>
 
           <p>Pemasukan</p>
         </div>
@@ -64,7 +69,7 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3>@currency($com_total_pengeluran)</h3>
+          <h3>@currency($total_pengeluaran)</h3>
 
           <p>Pengeluaran</p>
         </div>
@@ -81,11 +86,11 @@
 
 
   <div class="row">
-    <div class="col-sm-12 col-md-9">
+    <div class="col-sm-12 col-md-10">
       {{-- card panel nota --}}
       <div class="card">
         <div class="card-header ">
-          <h4 class="card-title"><b>Untung :</b> @currency($com_total_pemasukan - $com_total_pengeluran)</h4>
+          <h4 class="card-title"><b>Untung :</b> @currency($total_pemasukan - $total_pengeluaran)</h4>
           <div class="card-tools">
             <a href="/nota/excel" class="btn btn-sm btn-success"><i class="bi bi-filetype-xlsx"></i> Elsx</a>
           </div>
@@ -97,7 +102,7 @@
              {{session()->get('pesan')}}
           </div>
           @endif
-          <table class="table table-sm">
+          <table class="table table-sm" id="myTable">
             <thead>
               <tr>
                 <th style="width: 10px">#</th>
@@ -193,7 +198,7 @@
       </div>
       {{-- ./ card panel nota --}}
     </div>
-    <div class="col-sm-12 col-md-3">
+    <div class="col-sm-12 col-md-2">
        <!-- general form elements disabled -->
        <div class="card card-warning">
         <div class="card-header">
@@ -215,4 +220,16 @@
     </div>
   </div>
 @endsection
+
+
+@push('js')
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+  });
+  </script>
+@endpush
 

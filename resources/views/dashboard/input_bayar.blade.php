@@ -40,7 +40,7 @@
             <div>
                <label for="garansi" class="form-label">Garansi</label>
                <select class="custom-select form-control-border border-width-2 @error('garansi') is-invalid @enderror" name="garansi" id="garansi">
-                  <option value="">Pilih Item..</option>
+                  <option value="">Pilih Garansi..</option>
                   @for ($i = 1; $i <= 12; $i++)
                   <option @selected(($nota->notaDetail->label_garansi ?? old('garansi')) == $i) value="{{$i}}">{{$i}}</option>
                   @endfor

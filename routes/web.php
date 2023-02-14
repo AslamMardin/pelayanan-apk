@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\NotaDetailController;
+use App\Models\NotaDetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,16 +61,10 @@ Route::prefix('/workit')->group(function(){
     })->name('workit.pelanggan');
 
      // halaman pemasukan
-     Route::get('/pemasukan', function()
-     {
-        return view('workit.pemasukan');
-    })->name('workit.pemasukan');
+     Route::get('/pemasukan', [NotaDetailController::class, 'pemasukan'])->name('workit.pemasukan');
 
      // halaman pengeluaran
-     Route::get('/pengeluaran', function()
-     {
-        return view('workit.pengeluaran');
-    })->name('workit.pengeluaran');
+     Route::get('/pengeluaran', [NotaDetailController::class, 'pengeluaran'])->name('workit.pengeluaran');
 });
 
 
@@ -79,6 +75,8 @@ Route::delete('/pelanggan/hapus/{id}', [PelangganController::class, 'hapus'])->n
 Route::resource('/pelanggan', PelangganController::class);
 
 
+Route::get('/pemasukan/export', [NotaDetailController::class, 'export']);
+Route::get('/pengeluaran/export', [NotaDetailController::class, 'export']);
 
 
 Route::get('/nota/excel', [NotaController::class, 'excel']);
