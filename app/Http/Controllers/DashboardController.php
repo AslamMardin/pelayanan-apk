@@ -22,9 +22,17 @@ class DashboardController extends Controller
         }
         else
         {
+            if($this->cekBulan == 100)
+            {
             $pelanggans = Pelanggan::all();
             $notas = Nota::with('notaDetail')->latest()->paginate();
             $notaDetail = NotaDetail::get(['pemasukan', 'pengeluaran']);
+            }else {
+                $pelanggans = Pelanggan::whereMonth('created_at', $this->cekBulan)->get();
+                $notas = Nota::with('notaDetail')->whereMonth('created_at', $this->cekBulan)->latest()->paginate();
+                $notaDetail = NotaDetail::whereMonth('created_at', $this->cekBulan)->get(['pemasukan', 'pengeluaran']);
+            }
+            
         }
         
         $total_pemasukan = collect($notaDetail)->sum('pemasukan');
@@ -81,6 +89,7 @@ class DashboardController extends Controller
 
         $nota->status = "S";
         $nota->save();
-        return redirect()->route('workit.dashboard');
+        return redirect()->route('workit.dashboard')->with('pesan', 'Pembayaran Berhasil');
     }
+
 }

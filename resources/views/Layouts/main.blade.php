@@ -36,7 +36,8 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="bi bi-person-bounding-box"></i> 
+          {{ date('d-M-Y ') }}  
+              <i class="bi bi-person-bounding-box"></i> 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Informasi Akun</span>
@@ -99,9 +100,16 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+        @if(session()->has('pesan'))
+        <div class="alert alert-success m3" role="alert">
+          {{session()->get('pesan')}}
+        </div>
+        @endif
         @section('top-main')
             
         @show
+
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->

@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\NotaDetailController;
+use App\Http\Controllers\PengaturanController;
 use App\Models\NotaDetail;
 
 /*
@@ -86,6 +87,9 @@ Route::resource('/nota', NotaController::class);
                 ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
+
+    Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan');
+    Route::put('/pengaturan/update', [PengaturanController::class, 'update'])->name('pengaturan.update');
 
 });
 

@@ -2,11 +2,7 @@
 
 
 @section('main')
-@if(session()->has('pesan'))
-<div class="alert alert-success m3" role="alert">
-   {{session()->get('pesan')}}
-</div>
-@endif
+
 
 
     <div class="container">

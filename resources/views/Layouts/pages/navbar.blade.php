@@ -53,6 +53,14 @@
           </p>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{{route('pengaturan')}}" class="nav-link">
+          <i class="nav-icon bi bi-gear-wide-connected"></i>
+          <p>
+            Pengaturan
+          </p>
+        </a>
+      </li>
   
     </ul>
   </nav>

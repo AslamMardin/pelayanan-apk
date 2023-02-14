@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pengaturans', function (Blueprint $table) {
             $table->id();
-            $table->date('bulan');
+            $table->integer('bulan');
             $table->timestamps();
         });
     }

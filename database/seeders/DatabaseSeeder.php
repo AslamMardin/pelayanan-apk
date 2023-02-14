@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pengaturan::create([
-            'bulan' => now()
+            'bulan' => 2
         ]);
     }
 }

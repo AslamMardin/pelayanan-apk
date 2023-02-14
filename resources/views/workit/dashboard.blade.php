@@ -97,11 +97,7 @@
         </div>
         <div class="card-body">
 
-          @if(session()->has('pesan'))
-          <div class="alert alert-success m3" role="alert">
-             {{session()->get('pesan')}}
-          </div>
-          @endif
+          
           <table class="table table-sm" id="myTable">
             <thead>
               <tr>
