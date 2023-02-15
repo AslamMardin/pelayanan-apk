@@ -39,7 +39,8 @@ class PemasukanExport implements FromQuery, WithMapping, WithHeadings
             'Tanggal',
             'Nama Baramg',
             'Keterangan',
-            'Rupiah',
+            'Total Bayar',
+            'Keuntungan',
             ]
         ];  
     }
@@ -49,7 +50,8 @@ class PemasukanExport implements FromQuery, WithMapping, WithHeadings
                 $noDetail->created_at->format('d-m-Y'),
                 $noDetail->nota->nama_barang,
                 $noDetail->nota->keterangan,
-                ($noDetail->pemasukan) ? $noDetail->pemasukan : 0
+                ($noDetail->pemasukan) ? $noDetail->pemasukan : 0,
+                $noDetail->keuntungan
             ];
     }
 }
