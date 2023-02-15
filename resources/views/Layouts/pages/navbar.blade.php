@@ -19,11 +19,11 @@
           </li>
       <li class="nav-item menu-open">
         <a href="#" class="nav-link">
-          <i class="nav-icon bi bi-grid"></i>
+          <i class="nav-icon bi bi-briefcase-fill"></i>
           <p>
            Data
             <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">3</span>
+            <span class="badge badge-info right">1</span>
           </p>
         </a>
         <ul class="nav nav-treeview">
@@ -35,10 +35,31 @@
               <p>Keuntungan</p>
             </a>
           </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon bi bi-grid"></i>
+          <p>
+           Pengeluaran
+            <i class="fas fa-angle-left right"></i>
+            <span class="badge badge-info right">2</span>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          
+         
+          <li class="nav-item">
+            <a href="{{route('workit.pemasukan')}}" class="nav-link">
+              <i class="nav-icon bi bi-rocket-takeoff"></i>
+              <p>Jemput</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{route('workit.pengeluaran')}}" class="nav-link">
-              <i class="nav-icon bi bi-cash-coin"></i>
-              <p>Pengeluaran</p>
+              <i class="nav-icon bi bi-box-seam-fill"></i>
+              <p>Kebutuhan</p>
             </a>
           </li>
         </ul>

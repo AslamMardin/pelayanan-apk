@@ -18,25 +18,25 @@ class DashboardController extends Controller
         {
             $pelanggans = Pelanggan::whereMonth('created_at', $request->get('bulan_filter'))->get();
             // $notas = Nota::with('notaDetail')->whereMonth('created_at', $request->get('bulan_filter'))->latest()->paginate();
-            $notaDetail = NotaDetail::whereMonth('created_at', $request->get('bulan_filter'))->get(['pemasukan', 'pengeluaran']);
+            $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $request->get('bulan_filter'))->get(['pemasukan', 'pengeluaran']);
         }
         else
         {
             if($this->cekBulan == 100)
             {
             $pelanggans = Pelanggan::all();
-            $notaDetail = NotaDetail::get(['pemasukan', 'pengeluaran']);
+            $notaDetail = NotaDetail::with('nota.pelanggan')->get(['pemasukan', 'pengeluaran']);
             }else {
             $pelanggans = Pelanggan::whereMonth('created_at', $this->cekBulan)->get();
             // $notas = Nota::with('notaDetail')->whereMonth('created_at', $this->cekBulan)->latest()->paginate();
-            $notaDetail = NotaDetail::whereMonth('created_at', $this->cekBulan)->get(['pemasukan', 'pengeluaran']);
+            $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $this->cekBulan)->get(['pemasukan', 'pengeluaran']);
             }
         
     }
     
         $notas = Nota::with('notaDetail')->latest('created_at')->paginate();
-        $total_pemasukan = collect($notaDetail)->sum('pemasukan');
         $total_pengeluaran = collect($notaDetail)->sum('pengeluaran');
+        $total_pemasukan = collect($notaDetail)->sum('pemasukan');
         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $logs = LogAktif::latest()->limit(8)->get();
 

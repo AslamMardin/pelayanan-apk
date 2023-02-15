@@ -54,9 +54,9 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>@currency($total_pemasukan)</h3>
+          <h3>@currency($total_pemasukan - $total_pengeluaran)</h3>
 
-          <p>Pemasukan</p>
+          <p>Keuntungan</p>
         </div>
         <div class="icon">
           <i class="ion ion-arrow-down-a"></i>
@@ -90,7 +90,7 @@
       {{-- card panel nota --}}
       <div class="card">
         <div class="card-header ">
-          <h4 class="card-title"><b>Untung :</b> @currency($total_pemasukan - $total_pengeluaran)</h4>
+          <h4 class="card-title"><b>Total Pemasukan :</b> @currency($total_pemasukan)</h4>
           <div class="card-tools">
             <a href="/nota/excel" class="btn btn-sm btn-success"><i class="bi bi-filetype-xlsx"></i> Elsx</a>
           </div>
