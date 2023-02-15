@@ -58,8 +58,7 @@ class PelangganController extends Controller
         ]);
 
         $pesan = "Data ". $request->nama . "pelangga telah ditambah";
-        $request->session()->flush('pesan', $pesan);
-        return redirect()->route('workit.pelanggan');
+        return redirect('/workit/pelanggan')->with('pesan', $pesan);
        
     }
 

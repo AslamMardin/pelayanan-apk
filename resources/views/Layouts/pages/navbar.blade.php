@@ -32,7 +32,7 @@
           <li class="nav-item">
             <a href="{{route('workit.pemasukan')}}" class="nav-link">
               <i class="nav-icon bi bi-cash-coin"></i>
-              <p>Pemasukan</p>
+              <p>Keuntungan</p>
             </a>
           </li>
           <li class="nav-item">

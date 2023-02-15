@@ -23,7 +23,8 @@
                 <th scope="col">TANGGAL</th>
                 <th scope="col">NAMA BARANG</th>
                 <th scope="col">KETERANGAN</th>
-                <th scope="col">RUPIAH</th>
+                <th scope="col">TOTAL BAYAR</th>
+                <th scope="col">KEUNTUNGAN</th>
               </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     <td>{{ $item->nota->nama_barang }}</td>
                     <td>{{ $item->nota->keterangan }}</td>
                     <td>@currency($item->pemasukan)</td>
+                    <td>@currency($item->keuntungan)</td>
                 </tr>
                 @empty
                 <tr>
@@ -41,8 +43,8 @@
                 </tr>
                 @endforelse
                 <tr class="bg-secondary">
-                    <td colspan="4" align="left">Total Pemasukan</td>
-                    <td>@currency($total_pemasukan)</td>
+                    <td colspan="5" align="left">Total Keuntungan</td>
+                    <td>@currency($total_keuntungan)</td>
                 </tr>
             </tbody>
           </table>

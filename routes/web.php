@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('workit.dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('workit.dashboard');
 Route::get('/dashboard/{id}', [DashboardController::class, 'inputBayar'])->name('dashboard.input.bayar');
 
 Route::post('/dashboard/bayar/{id}', [DashboardController::class, 'bayar'])->name('dashboard.bayar');
@@ -69,11 +69,11 @@ Route::prefix('/workit')->group(function(){
 });
 
 
+Route::resource('/pelanggan', PelangganController::class);
 Route::get('/pelanggan/sampah', [PelangganController::class, 'sampah'])->name('pelanggan.sampah');
 Route::get('/pelanggan/export', [PelangganController::class, 'export']);
 Route::get('/pelanggan/restore/{id}', [PelangganController::class, 'restore'])->name('pelanggan.restore');
 Route::delete('/pelanggan/hapus/{id}', [PelangganController::class, 'hapus'])->name('pelanggan.hapus');
-Route::resource('/pelanggan', PelangganController::class);
 
 
 Route::get('/pemasukan/export/', [NotaDetailController::class, 'pemasukanExport']);

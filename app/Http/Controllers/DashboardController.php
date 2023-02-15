@@ -34,7 +34,7 @@ class DashboardController extends Controller
         
     }
     
-        $notas = Nota::with('notaDetail')->latest()->paginate();
+        $notas = Nota::with('notaDetail')->latest('created_at')->paginate();
         $total_pemasukan = collect($notaDetail)->sum('pemasukan');
         $total_pengeluaran = collect($notaDetail)->sum('pengeluaran');
         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
@@ -73,6 +73,7 @@ class DashboardController extends Controller
             $nota->notaDetail()->create([
                 'pengeluaran' => $request->pengeluaran,
                 'pemasukan' => $request->pemasukan,
+                'keuntungan' => $request->pemasukan - $request->pengeluaran,
                 'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
                 'label_garansi' => $request->garansi
             ]);
@@ -80,8 +81,9 @@ class DashboardController extends Controller
         }else {
             
             $nota->notaDetail()->update([
-                    'pengeluaran' => $request->pengeluaran,
-                    'pemasukan' => $request->pemasukan,
+                'pengeluaran' => $request->pengeluaran,
+                'pemasukan' => $request->pemasukan,
+                    'keuntungan' => $request->pemasukan - $request->pengeluaran,
                     'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
                     'label_garansi' => $request->garansi
             ]);

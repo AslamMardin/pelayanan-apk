@@ -21,10 +21,10 @@ class NotaDetailController extends Controller
             $notaDetails = NotaDetail::with('nota')->whereMonth('created_at', $this->cekBulan)->where('pemasukan', '!=', 0)->get();
         }
 
-        $total_pemasukan = collect($notaDetails)->sum('pemasukan');
+        $total_keuntungan = collect($notaDetails)->sum('keuntungan');
         return view('workit.pemasukan',[
             'notaDetails' => $notaDetails,
-            'total_pemasukan' => $total_pemasukan
+            'total_keuntungan' => $total_keuntungan
         ]);
     }
 

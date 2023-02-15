@@ -63,7 +63,7 @@
 
 
                     <div class="form-group">
-                      <label>Keterangan</label>
+                      <label>Kerusakan</label>
                      <input type="text" name="keterangan" class="form-control" value="{{old('keterangan')}}">
                       @error('keterangan')
                     <div class="text-danger text-sm m-1">{{ $message }}</div>
