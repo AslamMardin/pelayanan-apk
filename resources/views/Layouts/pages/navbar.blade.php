@@ -14,7 +14,7 @@
           <li class="nav-item">
             <a href="{{route('workit.pelayanan')}}" class="nav-link">
               <i class="nav-icon bi bi-clipboard2-fill"></i>
-              <p>Pelayanan</p>
+              <p>Nota</p>
             </a>
           </li>
       <li class="nav-item menu-open">

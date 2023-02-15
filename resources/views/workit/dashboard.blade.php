@@ -41,7 +41,7 @@
         <div class="inner">
           <h3>{{count($notas)}}</h3>
 
-          <p>Pelayanan</p>
+          <p>Nota</p>
         </div>
         <div class="icon">
           <i class="ion ion-wrench"></i>

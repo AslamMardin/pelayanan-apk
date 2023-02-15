@@ -7,7 +7,7 @@
     <div class="card-header border-0">
       <h3 class="card-title">DAFTAR PENGELUARAN</h3>
       <div class="card-tools">
-        <a href="/pengeluaran/export" class="btn btn-success btn-sm">
+        <a href="{{url('/pengeluaran/export')}}" class="btn btn-success btn-sm">
           <i class="bi bi-filetype-xlsx"></i> Xlsx
         </a>
       </div>

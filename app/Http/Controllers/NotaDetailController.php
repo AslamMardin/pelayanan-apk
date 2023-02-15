@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\NotaDetail;
+use App\Models\Pengaturan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
+use App\Exports\PemasukanExport;
+use App\Exports\PengeluaranExport;
 
 class NotaDetailController extends Controller
 {
@@ -37,4 +42,18 @@ class NotaDetailController extends Controller
             'total_pengeluaran' => $total_pengeluaran
         ]);
     }
+
+    public function pemasukanExport()
+    {
+        $bulan = Pengaturan::first()->bulan;
+        return (new PemasukanExport)->forJenis($bulan)->download('pemasukan-'. Carbon::now()->timestamp.'.xlsx');
+    }
+
+    public function pengeluaranExport()
+    {
+      
+        $bulan = Pengaturan::first()->bulan;
+        return (new PengeluaranExport)->forJenis($bulan)->download('pengeluaran-'. Carbon::now()->timestamp.'.xlsx');
+    }
+
 }

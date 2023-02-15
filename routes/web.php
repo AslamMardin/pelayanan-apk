@@ -76,8 +76,8 @@ Route::delete('/pelanggan/hapus/{id}', [PelangganController::class, 'hapus'])->n
 Route::resource('/pelanggan', PelangganController::class);
 
 
-Route::get('/pemasukan/export', [NotaDetailController::class, 'export']);
-Route::get('/pengeluaran/export', [NotaDetailController::class, 'export']);
+Route::get('/pemasukan/export/', [NotaDetailController::class, 'pemasukanExport']);
+Route::get('/pengeluaran/export/', [NotaDetailController::class, 'pengeluaranExport']);
 
 
 Route::get('/nota/excel', [NotaController::class, 'excel']);
