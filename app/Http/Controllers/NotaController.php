@@ -73,9 +73,12 @@ class NotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($notum)
     {
-        //
+        $nota = Nota::findOrFail($notum);
+        return view('nota.edit', [
+            'nota' => $nota
+        ]);
     }
 
     /**
@@ -85,9 +88,18 @@ class NotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NotaRequest $request, $notum)
     {
-        //
+
+        Nota::findOrFail($notum)->update([
+            'jenis' => $request->jenis,
+            'nama_barang' => $request->nama_barang,
+            'keterangan' => $request->keterangan,
+            'pelanggan_id' => $request->pelanggan_id,
+        ]);
+
+        $pesan = "Nota telah diedit";
+        return redirect()->route('workit.dashboard')->with('pesan', $pesan);
     }
 
     /**

@@ -15,7 +15,7 @@ class PemasukanExport implements FromQuery, WithMapping, WithHeadings
     use Exportable;
     public $bulan;
     
-  
+    
 
     public function forJenis($bulan)
     {
@@ -34,9 +34,10 @@ class PemasukanExport implements FromQuery, WithMapping, WithHeadings
     {
         $nama_bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         return [
-            ["Tabel Pemasukan di bulan ". $nama_bulan[$this->bulan - 1]],
+            ["Tabel keuntungan di bulan ". $nama_bulan[$this->bulan - 1]],
             [
             'Tanggal',
+            'Nama',
             'Nama Baramg',
             'Keterangan',
             'Total Bayar',
@@ -48,9 +49,10 @@ class PemasukanExport implements FromQuery, WithMapping, WithHeadings
     {
             return [
                 $noDetail->created_at->format('d-m-Y'),
+                $noDetail->nota->pelanggan->nama,
                 $noDetail->nota->nama_barang,
                 $noDetail->nota->keterangan,
-                ($noDetail->pemasukan) ? $noDetail->pemasukan : 0,
+                ($noDetail->pemasukan ?? 0),
                 $noDetail->keuntungan
             ];
     }

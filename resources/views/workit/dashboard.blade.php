@@ -146,7 +146,10 @@
               
                 <td>
                   <div class="btn-group">
-                    <a href="{{route('nota.show', ['notum' => $item->id])}}" class="btn btn-sm btn-info">
+                    <a href="{{route('nota.edit', ['notum' => $item->id])}}" class="btn btn-sm btn-info">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <a href="{{route('nota.show', ['notum' => $item->id])}}" class="btn btn-sm btn-secondary">
                       <i class="ion ion-eye"></i>
                     </a>
                     <a href="{{route('dashboard.input.bayar', ['id' => $item->id])}}" class="btn btn-sm btn-warning">

@@ -16,9 +16,9 @@ class NotaDetailController extends Controller
     {
         if($this->cekBulan == 100)
         {
-            $notaDetails = NotaDetail::with('nota')->where('pemasukan', '!=', 0)->get();
+            $notaDetails = NotaDetail::with('nota.pelanggan', 'nota')->where('pemasukan', '!=', 0)->get();
         } else {
-            $notaDetails = NotaDetail::with('nota')->whereMonth('created_at', $this->cekBulan)->where('pemasukan', '!=', 0)->get();
+            $notaDetails = NotaDetail::with('nota.pelanggan', 'nota')->whereMonth('created_at', $this->cekBulan)->where('pemasukan', '!=', 0)->get();
         }
 
         $total_keuntungan = collect($notaDetails)->sum('keuntungan');

@@ -21,6 +21,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">TANGGAL</th>
+                <th scope="col">NAMA</th>
                 <th scope="col">NAMA BARANG</th>
                 <th scope="col">KETERANGAN</th>
                 <th scope="col">TOTAL BAYAR</th>
@@ -32,6 +33,7 @@
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{ $item->nota->created_at->format('d-m-Y') }}</td>
+                    <td>{{ $item->nota->pelanggan->nama }}</td>
                     <td>{{ $item->nota->nama_barang }}</td>
                     <td>{{ $item->nota->keterangan }}</td>
                     <td>@currency($item->pemasukan)</td>
@@ -39,11 +41,11 @@
                 </tr>
                 @empty
                 <tr>
-                  <td colspan="5"><h3 class="text-muted text-center">PEMASUKAN BELUM ADA</h3></td>
+                  <td colspan="6"><h3 class="text-muted text-center">PEMASUKAN BELUM ADA</h3></td>
                 </tr>
                 @endforelse
                 <tr class="bg-secondary">
-                    <td colspan="5" align="left">Total Keuntungan</td>
+                    <td colspan="6" align="left">Total Keuntungan</td>
                     <td>@currency($total_keuntungan)</td>
                 </tr>
             </tbody>

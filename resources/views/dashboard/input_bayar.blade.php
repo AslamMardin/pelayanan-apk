@@ -13,7 +13,7 @@
                 <input type="text" name="id_nota" class="form-control @error('id_nota') is-invalid @enderror" value="{{$nota->id}}" readonly>
                 <div class="text-danger text-sm m-1">
                     <b>Nota : </b>
-                    {{$nota->nama_barang}} - {{$nota->keterangan}}
+                    {{$nota->pelanggan->nama}} : {{$nota->nama_barang}} - {{$nota->keterangan}}
                 </div>
              </div>
 
