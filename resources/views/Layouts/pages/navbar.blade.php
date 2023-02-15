@@ -17,9 +17,9 @@
               <p>Nota</p>
             </a>
           </li>
-      <li class="nav-item menu-open">
+      <li class="nav-item">
         <a href="#" class="nav-link">
-          <i class="nav-icon bi bi-briefcase-fill"></i>
+          <i class="nav-icon bi bi-pin-angle-fill"></i>
           <p>
            Data
             <i class="fas fa-angle-left right"></i>
@@ -40,7 +40,7 @@
 
       <li class="nav-item">
         <a href="#" class="nav-link">
-          <i class="nav-icon bi bi-grid"></i>
+          <i class="nav-icon bi bi-pin-angle-fill"></i>
           <p>
            Pengeluaran
             <i class="fas fa-angle-left right"></i>
@@ -51,13 +51,13 @@
           
          
           <li class="nav-item">
-            <a href="{{route('workit.pemasukan')}}" class="nav-link">
+            <a href="{{route('jemput.index')}}" class="nav-link">
               <i class="nav-icon bi bi-rocket-takeoff"></i>
               <p>Jemput</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('workit.pengeluaran')}}" class="nav-link">
+            <a href="{{route('kebutuhan.index')}}" class="nav-link">
               <i class="nav-icon bi bi-box-seam-fill"></i>
               <p>Kebutuhan</p>
             </a>

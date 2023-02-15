@@ -9,6 +9,8 @@ use App\Models\NotaDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\BayarRequest;
+use App\Models\Jemput;
+use App\Models\Kebutuhan;
 
 class DashboardController extends Controller
 {
@@ -26,16 +28,23 @@ class DashboardController extends Controller
             {
             $pelanggans = Pelanggan::all();
             $notaDetail = NotaDetail::with('nota.pelanggan')->get(['pemasukan', 'pengeluaran']);
+            $jemput = Jemput::all();
+            $kebutuhan = Kebutuhan::all();
             }else {
             $pelanggans = Pelanggan::whereMonth('created_at', $this->cekBulan)->get();
             // $notas = Nota::with('notaDetail')->whereMonth('created_at', $this->cekBulan)->latest()->paginate();
+            $jemput = Jemput::whereMonth('created_at', $this->cekBulan)->get();
+            $kebutuhan = Kebutuhan::whereMonth('created_at', $this->cekBulan)->get();
             $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $this->cekBulan)->get(['pemasukan', 'pengeluaran']);
             }
         
     }
-    
+        
         $notas = Nota::with('notaDetail')->latest('created_at')->paginate();
-        $total_pengeluaran = collect($notaDetail)->sum('pengeluaran');
+
+        $total_jemput = collect($jemput)->sum('transportasi');
+        $total_kebutuhan = collect($kebutuhan)->sum('harga');
+        $total_pengeluaran = ($total_jemput + $total_kebutuhan);
         $total_pemasukan = collect($notaDetail)->sum('pemasukan');
         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $logs = LogAktif::latest()->limit(8)->get();

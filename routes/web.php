@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\JemputController;
+use App\Http\Controllers\KebutuhanController;
 use App\Http\Controllers\NotaDetailController;
 use App\Http\Controllers\PengaturanController;
 use App\Models\NotaDetail;
@@ -83,14 +85,17 @@ Route::get('/pengeluaran/export/', [NotaDetailController::class, 'pengeluaranExp
 Route::get('/nota/excel', [NotaController::class, 'excel']);
 Route::resource('/nota', NotaController::class);
 
-  Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
+Route::get('register', [RegisteredUserController::class, 'create'])
+->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan');
-    Route::put('/pengaturan/update', [PengaturanController::class, 'update'])->name('pengaturan.update');
+Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan');
+Route::put('/pengaturan/update', [PengaturanController::class, 'update'])->name('pengaturan.update');
 
+
+Route::resource('/jemput', JemputController::class);
+Route::resource('/kebutuhan', KebutuhanController::class);
 });
 
 

@@ -90,7 +90,13 @@
       {{-- card panel nota --}}
       <div class="card">
         <div class="card-header ">
-          <h4 class="card-title"><b>Total Pemasukan :</b> @currency($total_pemasukan)</h4>
+          <h4 class="card-title">
+            <b class="text-success">
+              <i class="bi bi-coin"></i>
+              @currency($total_pemasukan) 
+            </b> 
+            
+          </h4>
           <div class="card-tools">
             <a href="/nota/excel" class="btn btn-sm btn-success"><i class="bi bi-filetype-xlsx"></i> Elsx</a>
           </div>
