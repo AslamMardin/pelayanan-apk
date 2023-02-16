@@ -59,8 +59,8 @@
                         </div>
                       </div>
                       <hr>
-                      <p><b>Pengeluaran</b> : @if($nota->notaDetail->pengeluaran) @currency($nota->notaDetail->pengeluaran) @else 0 @endif</p>
-                      <p><b>Total Bayar</b> : @if($nota->notaDetail->pemasukan) @currency($nota->notaDetail->pemasukan) @else 0 @endif</p>
+                      <p><b>Pengeluaran</b> : @if($nota->notaDetail->pengeluaran == null) @currency($nota->notaDetail->pengeluaran) @else 0 @endif</p>
+                      <p><b>Total Bayar</b> : @if($nota->notaDetail->pemasukan == null) @currency($nota->notaDetail->pemasukan) @else 0 @endif</p>
                 </div>
 
 

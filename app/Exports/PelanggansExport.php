@@ -19,7 +19,6 @@ class PelanggansExport implements FromCollection, WithMapping, WithHeadings
     public function map($pelanggan): array
     {
         return [
-            $pelanggan->id,
             $pelanggan->nama,
             $pelanggan->jenis_kelamin,
             $pelanggan->nomor,
@@ -31,11 +30,10 @@ class PelanggansExport implements FromCollection, WithMapping, WithHeadings
     public function headings(): array
     {
         return [
-            '#',
-            'Nama',
-            'Jenis Kelamin',
-            'Nomor',
-            'Alamat',
+            'nama',
+            'jenis_kelamin',
+            'nomor',
+            'alamat',
         ];
     }
 }

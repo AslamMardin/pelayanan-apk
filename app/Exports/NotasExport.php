@@ -28,9 +28,9 @@ class NotasExport implements WithMapping, WithHeadings, FromQuery
 
     public function map($nota): array
     {
-        $label  = empty($nota->notaDetail->label_garansi) ? 0 : $nota->notaDetail->label_garansi;
-        $pengeluaran  = empty($nota->notaDetail->pengeluaran) ? 0 : $nota->notaDetail->pengeluaran;
-        $pemasukan  = empty($nota->notaDetail->pemasukan) ? 0 : $nota->notaDetail->pemasukan;
+        $label  = ($nota->notaDetail->label_garansi == null) ? 0 : $nota->notaDetail->label_garansi;
+        $pengeluaran  = ($nota->notaDetail->pengeluaran == null) ? 0 : $nota->notaDetail->pengeluaran;
+        $pemasukan  = ($nota->notaDetail->pemasukan == null) ? 0 : $nota->notaDetail->pemasukan;
         return [
             $nota->nama_barang,
             $nota->pelanggan->nama,

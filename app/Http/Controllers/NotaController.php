@@ -120,6 +120,6 @@ class NotaController extends Controller
     {
         // return Nota::download(new NotasExport, 'nota'.Carbon::now()->timestamp.'.xlsx');
 
-        return (new NotasExport)->status('S')->download('nota-'.Carbon::now()->timestamp.'.xlsx');  
+        return (new NotasExport)->status('S')->download('nota-'.Carbon::now()->format('d-mY').'.xlsx');  
       }
 }

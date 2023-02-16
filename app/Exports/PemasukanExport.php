@@ -34,14 +34,13 @@ class PemasukanExport implements FromQuery, WithMapping, WithHeadings
     {
         $nama_bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         return [
-            ["Tabel keuntungan di bulan ". $nama_bulan[$this->bulan - 1]],
             [
-            'Tanggal',
-            'Nama',
-            'Nama Baramg',
-            'Keterangan',
-            'Total Bayar',
-            'Keuntungan',
+            'tanggal',
+            'nama',
+            'nama_barang',
+            'keterangan',
+            'total_bayar',
+            'keuntungan',
             ]
         ];  
     }

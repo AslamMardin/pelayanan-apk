@@ -46,14 +46,14 @@ class NotaDetailController extends Controller
     public function pemasukanExport()
     {
         $bulan = Pengaturan::first()->bulan;
-        return (new PemasukanExport)->forJenis($bulan)->download('pemasukan-'. Carbon::now()->timestamp.'.xlsx');
+        return (new PemasukanExport)->forJenis($bulan)->download('pemasukan-'. Carbon::now()->format('d-mY').'.xlsx');
     }
 
     public function pengeluaranExport()
     {
       
         $bulan = Pengaturan::first()->bulan;
-        return (new PengeluaranExport)->forJenis($bulan)->download('pengeluaran-'. Carbon::now()->timestamp.'.xlsx');
+        return (new PengeluaranExport)->forJenis($bulan)->download('pengeluaran-'. Carbon::now()->format('d-mY').'.xlsx');
     }
 
 }

@@ -12,8 +12,11 @@
     <div class="card-header border-0">
       <h3 class="card-title">DAFTAR PELANGGAN</h3>
       <div class="card-tools">
+        <a href="{{route('pelanggan.import')}}" class="btn btn-success btn-sm">
+          <i class="bi bi-filetype-xlsx"></i> Import
+        </a>
         <a href="/pelanggan/export" class="btn btn-success btn-sm">
-          <i class="bi bi-filetype-xlsx"></i> Xlsx
+          <i class="bi bi-filetype-xlsx"></i> Export Xlsx
         </a>
         <a href="{{route('pelanggan.create')}}" class="btn btn-info btn-sm">
           <i class="fas fa-user-plus"></i> Tambah

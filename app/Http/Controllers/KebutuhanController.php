@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KebutuhanRequest;
+use Carbon\Carbon;
 use App\Models\Kebutuhan;
 use Illuminate\Http\Request;
+use App\Exports\KebutuhansExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\KebutuhanRequest;
+use App\Imports\KebutuhansImport;
 
 class KebutuhanController extends Controller
 {
@@ -100,5 +104,21 @@ class KebutuhanController extends Controller
         $kebutuhan->delete();
         $pesan = "Data $kebutuhan->barang telah dihapus";
         return redirect()->route('kebutuhan.index')->with('pesan', $pesan);
+    }
+
+    public function export()
+    {
+        return (new KebutuhansExport)->download('kebutuhan-'.Carbon::now()->format('d-m-Y').'.xlsx');
+    }
+    public function import()
+    {
+        return view('kebutuhan.import');
+    }
+
+    public function ProsesImport(Request $request)
+    {
+        Excel::import(new KebutuhansImport, $request->file('file'));
+        
+        return redirect('/kebutuhan')->with('pesan', 'All good!');
     }
 }

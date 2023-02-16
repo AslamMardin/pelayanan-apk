@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\JemputRequest;
+use Carbon\Carbon;
 use App\Models\Jemput;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use App\Exports\JemputsExport;
+use App\Imports\JemputsImport;
+use App\Http\Requests\JemputRequest;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JemputController extends Controller
 {
@@ -112,4 +116,23 @@ class JemputController extends Controller
         $pesan = "Data $jemput->barang telah dihapus";
         return redirect()->route('jemput.index')->with('pesan', $pesan);
     }
+
+    public function export()
+    {
+        return (new JemputsExport)->download('jemput-'.Carbon::now()->format('d-m-Y').'.xlsx');
+    }
+
+    public function import()
+    {
+        return view('jemput.import');
+    }
+
+    public function ProsesImport(Request $request)
+    {
+        Excel::import(new JemputsImport, $request->file('file'));
+        
+        return redirect('/jemput')->with('pesan', 'All good!');
+    }
+
+    
 }

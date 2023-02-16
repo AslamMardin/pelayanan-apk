@@ -33,12 +33,11 @@ class PengeluaranExport implements FromQuery, WithMapping, WithHeadings
     {
         $nama_bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         return [
-            ["Tabel Pengeluaran di bulan ". $nama_bulan[$this->bulan - 1]],
             [
-            'Tanggal',
-            'Nama Baramg',
-            'Keterangan',
-            'Rupiah',
+            'tanggal',
+            'nama_barang',
+            'keterangan',
+            'rupiah',
             ]
         ];  
     }
@@ -48,7 +47,7 @@ class PengeluaranExport implements FromQuery, WithMapping, WithHeadings
                 $noDetail->created_at->format('d-m-Y'),
                 $noDetail->nota->nama_barang,
                 $noDetail->nota->keterangan,
-                ($noDetail->pengeluaran) ? $noDetail->pengeluaran : 0
+                ($noDetail->pengeluaran == null) ? $noDetail->pengeluaran : 0
             ];
     }
 }

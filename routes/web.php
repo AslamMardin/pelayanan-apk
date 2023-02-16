@@ -1,16 +1,17 @@
 <?php
+use Carbon\Carbon;
 use App\Models\Pelanggan;
+use App\Models\NotaDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotaController;
+use App\Http\Controllers\JemputController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PelangganController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\JemputController;
 use App\Http\Controllers\KebutuhanController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\NotaDetailController;
 use App\Http\Controllers\PengaturanController;
-use App\Models\NotaDetail;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,13 +56,7 @@ Route::prefix('/workit')->group(function(){
     })->name('workit.pelayanan');
 
      // halaman pelanggan
-     Route::get('/pelanggan', function()
-     {
-        $pelangganTrashed = Pelanggan::onlyTrashed()->get();
-        return view('workit.pelanggan', [
-            'pelangganTrashed' =>count($pelangganTrashed)
-        ]);
-    })->name('workit.pelanggan');
+     Route::get('/pelanggan', [PelangganController::class, 'index'])->name('workit.pelanggan');
 
      // halaman pemasukan
      Route::get('/pemasukan', [NotaDetailController::class, 'pemasukan'])->name('workit.pemasukan');
@@ -71,9 +66,11 @@ Route::prefix('/workit')->group(function(){
 });
 
 
-Route::resource('/pelanggan', PelangganController::class);
-Route::get('/pelanggan/sampah', [PelangganController::class, 'sampah'])->name('pelanggan.sampah');
+Route::get('/pelanggan/import', [PelangganController::class, 'import'])->name('pelanggan.import');
+Route::post('/pelanggan/ProsesImport', [PelangganController::class, 'ProsesImport']);
 Route::get('/pelanggan/export', [PelangganController::class, 'export']);
+Route::get('/pelanggan/sampah', [PelangganController::class, 'sampah'])->name('pelanggan.sampah');
+Route::resource('/pelanggan', PelangganController::class);
 Route::get('/pelanggan/restore/{id}', [PelangganController::class, 'restore'])->name('pelanggan.restore');
 Route::delete('/pelanggan/hapus/{id}', [PelangganController::class, 'hapus'])->name('pelanggan.hapus');
 
@@ -94,10 +91,21 @@ Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengatu
 Route::put('/pengaturan/update', [PengaturanController::class, 'update'])->name('pengaturan.update');
 
 
+Route::get('/jemput/export', [JemputController::class, 'export']);
+Route::get('/jemput/import', [JemputController::class, 'import'])->name('jemput.import');
+Route::post('/jemput/ProsesImport', [JemputController::class, 'ProsesImport']);
 Route::resource('/jemput', JemputController::class);
+
+Route::get('/kebutuhan/export', [KebutuhanController::class, 'export']);
+Route::get('/kebutuhan/import', [KebutuhanController::class, 'import'])->name('kebutuhan.import');
+Route::post('/kebutuhan/ProsesImport', [KebutuhanController::class, 'ProsesImport']);
 Route::resource('/kebutuhan', KebutuhanController::class);
 });
 
+
+route::get('/test', function(){
+   dd(strtotime("17-02-2023"));
+});
 
 
 require __DIR__.'/auth.php';

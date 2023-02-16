@@ -7,6 +7,8 @@ use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Exports\PelanggansExport;
+use App\Imports\PelanggansImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\PelangganRequest;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +21,10 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        //
+        $pelangganTrashed = Pelanggan::onlyTrashed()->orderBy('nama', 'asc')->get();
+        return view('workit.pelanggan', [
+            'pelangganTrashed' =>count($pelangganTrashed)
+        ]);
     }
 
     /**
@@ -149,6 +154,19 @@ class PelangganController extends Controller
     public function export()
     {
         // return Pelanggan::download(new PelanggansExport, 'pelanggan-'.Carbon::now()->timestamp.'.xlsx');
-        return (new PelanggansExport)->download('pelanggan-'.Carbon::now()->timestamp.'.xlsx');
+        return (new PelanggansExport)->download('pelanggan-'.Carbon::now()->format('d-m-Y').'.xlsx');
+    }
+
+    public function import()
+    {
+    
+        return view('pelanggan.import');
+    }
+
+    public function ProsesImport(Request $request)
+    {
+        Excel::import(new PelanggansImport, $request->file('file'));
+        
+        return redirect('/workit/pelanggan')->with('pesan', 'All good!');
     }
 }

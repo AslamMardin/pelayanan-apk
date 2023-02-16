@@ -12,7 +12,10 @@
     <div class="card-header border-0">
       <h3 class="card-title">DAFTAR KEBUTUHAN</h3>
       <div class="card-tools">
-        <a href="/pelanggan/export" class="btn btn-success btn-sm">
+        <a href="{{route('kebutuhan.import')}}" class="btn btn-success btn-sm">
+          <i class="bi bi-filetype-xlsx"></i> Import
+        </a>
+        <a href="/kebutuhan/export" class="btn btn-success btn-sm">
           <i class="bi bi-filetype-xlsx"></i> Xlsx
         </a>
         <a href="{{route('kebutuhan.create')}}" class="btn btn-info btn-sm">
