@@ -15,7 +15,7 @@ class KebutuhanController extends Controller
      */
     public function index()
     {
-        $kebutuhans = Kebutuhan::all();
+        $kebutuhans = Kebutuhan::orderBy('created_at')->get();
         $total_harga = collect($kebutuhans)->sum('harga');
         return view('kebutuhan.index', [
             'kebutuhans' => $kebutuhans,

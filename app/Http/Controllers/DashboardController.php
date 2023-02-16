@@ -20,22 +20,22 @@ class DashboardController extends Controller
         {
             $pelanggans = Pelanggan::whereMonth('created_at', $request->get('bulan_filter'))->get();
             // $notas = Nota::with('notaDetail')->whereMonth('created_at', $request->get('bulan_filter'))->latest()->paginate();
-            $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $request->get('bulan_filter'))->get(['pemasukan', 'pengeluaran']);
+            $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $request->get('bulan_filter'))->get();
         }
         else
         {
             if($this->cekBulan == 100)
             {
             $pelanggans = Pelanggan::all();
-            $notaDetail = NotaDetail::with('nota.pelanggan')->get(['pemasukan', 'pengeluaran']);
+            $notaDetail = NotaDetail::with('nota.pelanggan')->get();
             $jemput = Jemput::all();
             $kebutuhan = Kebutuhan::all();
             }else {
             $pelanggans = Pelanggan::whereMonth('created_at', $this->cekBulan)->get();
-            // $notas = Nota::with('notaDetail')->whereMonth('created_at', $this->cekBulan)->latest()->paginate();
+            // $notas = Nota::with('notaDetail')->where('status', 'BK')->whereMonth('created_at', $this->cekBulan)->latest()->paginate();
             $jemput = Jemput::whereMonth('created_at', $this->cekBulan)->get();
             $kebutuhan = Kebutuhan::whereMonth('created_at', $this->cekBulan)->get();
-            $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $this->cekBulan)->get(['pemasukan', 'pengeluaran']);
+            $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $this->cekBulan)->get();
             }
         
     }
@@ -45,7 +45,7 @@ class DashboardController extends Controller
         $total_jemput = collect($jemput)->sum('transportasi');
         $total_kebutuhan = collect($kebutuhan)->sum('harga');
         $total_pengeluaran = ($total_jemput + $total_kebutuhan);
-        $total_pemasukan = collect($notaDetail)->sum('pemasukan');
+        $total_keuntungan = collect($notaDetail)->sum('keuntungan');
         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $logs = LogAktif::latest()->limit(8)->get();
 
@@ -53,7 +53,7 @@ class DashboardController extends Controller
             'notas' => $notas,
             'logs' => $logs,
             'pelanggans' => $pelanggans,
-            'total_pemasukan' => $total_pemasukan,
+            'total_keuntungan' => $total_keuntungan,
             'total_pengeluaran' => $total_pengeluaran,
             'bulan' => $bulan
         ]);
@@ -71,34 +71,33 @@ class DashboardController extends Controller
 
     public function bayar(BayarRequest $request,$id)
     {
-    //    if(empty($request->garansi))
-    //    {
-    //     $request['garansi'] = 2;
-    //    }
         $nota = Nota::where('id',$id)->first();
         $cek = Nota::findOrFail($id)->notaDetail;
+
+        $data = [
+            'pengeluaran' => $request->pengeluaran,
+            'pemasukan' => $request->pemasukan,
+            'keuntungan' => $request->pemasukan - $request->pengeluaran,
+            'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
+            'label_garansi' => $request->garansi
+        ];
+
         if(!$cek)
         {
-            $nota->notaDetail()->create([
-                'pengeluaran' => $request->pengeluaran,
-                'pemasukan' => $request->pemasukan,
-                'keuntungan' => $request->pemasukan - $request->pengeluaran,
-                'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
-                'label_garansi' => $request->garansi
-            ]);
+            $nota->notaDetail()->create($data);
             
         }else {
             
-            $nota->notaDetail()->update([
-                'pengeluaran' => $request->pengeluaran,
-                'pemasukan' => $request->pemasukan,
-                    'keuntungan' => $request->pemasukan - $request->pengeluaran,
-                    'garansi' => Carbon::now()->addMonth($request->garansi)->format('Y-m-d'),
-                    'label_garansi' => $request->garansi
-            ]);
+            $nota->notaDetail()->update($data);
         }
 
-        $nota->status = "S";
+        if($request->has('status'))
+        {
+            $nota->status = "S";
+        }else {
+            $nota->status = "BS";
+
+        }
         $nota->save();
         return redirect()->route('workit.dashboard')->with('pesan', 'Pembayaran Berhasil');
     }

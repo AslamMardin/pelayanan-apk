@@ -12,7 +12,7 @@
                 <label for="id_nota" class="form-label">ID NOTA</label>
                 <input type="text" name="id_nota" class="form-control @error('id_nota') is-invalid @enderror" value="{{$nota->id}}" readonly>
                 <div class="text-danger text-sm m-1">
-                    <b>Nota : </b>
+                   
                     {{$nota->pelanggan->nama}} : {{$nota->nama_barang}} - {{$nota->keterangan}}
                 </div>
              </div>
@@ -37,7 +37,7 @@
 
             
             
-            <div>
+            <div class="mb-3">
                <label for="garansi" class="form-label">Garansi</label>
                <select class="custom-select form-control-border border-width-2 @error('garansi') is-invalid @enderror" name="garansi" id="garansi">
                   <option value="">Pilih Garansi..</option>
@@ -49,6 +49,17 @@
                      <div class="text-danger text-sm m-1">{{ $message }}</div>
                  @enderror
              </div>
+
+             
+            <div class="mb-3">
+               <div class="form-check">
+                  <input class="form-check-input" name="status" type="checkbox" @checked($nota->status == "S")>
+                  <label class="form-check-label">Status Bayar</label>
+                </div>
+               @error('status')
+               <div class="text-danger text-sm m-1">{{ $message }}</div>
+               @enderror
+            </div>
            
              <div>
                <button type="submit" class="btn mt-3 btn-primary">

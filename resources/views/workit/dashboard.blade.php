@@ -54,7 +54,7 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>@currency($total_pemasukan - $total_pengeluaran)</h3>
+          <h3>@currency($total_keuntungan)</h3>
 
           <p>Keuntungan</p>
         </div>
@@ -91,11 +91,7 @@
       <div class="card">
         <div class="card-header ">
           <h4 class="card-title">
-            <b class="text-success">
-              <i class="bi bi-coin"></i>
-              @currency($total_pemasukan) 
-            </b> 
-            
+            Daftar Nota
           </h4>
           <div class="card-tools">
             <a href="/nota/excel" class="btn btn-sm btn-success"><i class="bi bi-filetype-xlsx"></i> Elsx</a>
@@ -109,9 +105,8 @@
               <tr>
                 <th>#</th>
                 <th>Barang</th>
-                <th>Nota</th>
-                <th>Tanggal</th>
-                <th>Garansi</th>
+                <th width="230">Nota</th>
+                <th>Waktu</th>
                 <th style="width: 40px">Aksi</th>
                 <th style="width: 40px">Status</th>
               </tr>
@@ -148,7 +143,6 @@
                     </span>
                 </td>
                 <td>{{$item->created_at->diffForHumans() }}</td>
-                <td>{{$item->notaDetail->label_garansi  ?? "-"}} Bulan</td>
               
                 <td>
                   <div class="btn-group">
@@ -227,7 +221,7 @@
 @endsection
 
 
-@push('js')
+{{-- @push('js')
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 
@@ -236,5 +230,5 @@
     $('#myTable').DataTable();
   });
   </script>
-@endpush
+@endpush --}}
 

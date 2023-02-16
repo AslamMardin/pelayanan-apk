@@ -16,7 +16,7 @@ class JemputController extends Controller
      */
     public function index()
     {
-        $jemputs = Jemput::with('pelanggan')->get();
+        $jemputs = Jemput::with('pelanggan')->orderBy('created_at')->get();
         $total_transportasi = collect($jemputs)->sum('transportasi');
         return view('jemput.index', [
             'jemputs' => $jemputs,
