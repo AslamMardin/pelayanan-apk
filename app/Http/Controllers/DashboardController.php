@@ -19,7 +19,7 @@ class DashboardController extends Controller
         if($request->has('bulan_filter'))
         {
             $pelanggans = Pelanggan::whereMonth('created_at', $request->get('bulan_filter'))->get();
-            // $notas = Nota::with('notaDetail')->whereMonth('created_at', $request->get('bulan_filter'))->latest()->paginate();
+            $notas = Nota::with('notaDetail')->where('status', 'BS')->whereMonth('created_at', $request->get('bulan_filter'))->latest()->paginate();
             $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $request->get('bulan_filter'))->get();
         }
         else
@@ -32,7 +32,7 @@ class DashboardController extends Controller
             $kebutuhan = Kebutuhan::all();
             }else {
             $pelanggans = Pelanggan::whereMonth('created_at', $this->cekBulan)->get();
-            // $notas = Nota::with('notaDetail')->where('status', 'BK')->whereMonth('created_at', $this->cekBulan)->latest()->paginate();
+            $notas = Nota::with('notaDetail')->whereMonth('created_at', $this->cekBulan)->orWhere('status', 'BS')->latest()->paginate();
             $jemput = Jemput::whereMonth('created_at', $this->cekBulan)->get();
             $kebutuhan = Kebutuhan::whereMonth('created_at', $this->cekBulan)->get();
             $notaDetail = NotaDetail::with('nota.pelanggan')->whereMonth('created_at', $this->cekBulan)->get();
@@ -40,7 +40,6 @@ class DashboardController extends Controller
         
     }
         
-        $notas = Nota::with('notaDetail')->latest('created_at')->paginate();
 
         $total_jemput = collect($jemput)->sum('transportasi');
         $total_kebutuhan = collect($kebutuhan)->sum('harga');
