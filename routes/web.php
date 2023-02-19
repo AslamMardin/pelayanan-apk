@@ -2,6 +2,7 @@
 use Carbon\Carbon;
 use App\Models\Pelanggan;
 use App\Models\NotaDetail;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\JemputController;
@@ -48,6 +49,8 @@ Route::get('/dashboard/{id}', [DashboardController::class, 'inputBayar'])->name(
 
 Route::post('/dashboard/bayar/{id}', [DashboardController::class, 'bayar'])->name('dashboard.bayar');
 
+
+
 Route::prefix('/workit')->group(function(){
     // halaman pelayanan
     Route::get('/pelayanan', function()
@@ -80,6 +83,7 @@ Route::get('/pengeluaran/export/', [NotaDetailController::class, 'pengeluaranExp
 
 
 Route::get('/nota/excel', [NotaController::class, 'excel']);
+Route::get('/nota/pdf/{nota}', [NotaController::class, 'pdfView'])->name('nota.pdf');
 Route::resource('/nota', NotaController::class);
 
 Route::get('register', [RegisteredUserController::class, 'create'])
@@ -104,7 +108,9 @@ Route::resource('/kebutuhan', KebutuhanController::class);
 
 
 route::get('/test', function(){
-   dd(strtotime("17-02-2023"));
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
 });
 
 

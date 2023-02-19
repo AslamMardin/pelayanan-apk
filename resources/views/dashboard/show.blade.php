@@ -6,10 +6,14 @@
   <div class="row">
     <div class="col-sm-12 col-md-6 offset-3">
         <div class="card my-2">
+          <div class="card-header">
+            <h5 class="card-title">Nota Lengkap</h5>
+            <div class="card-tools">
+              <a href="{{route('nota.pdf', ['nota' => $nota->id])}}" class="btn btn-sm btn-danger"> <i class="bi bi-printer-fill"></i> Cetak</a>
+            </div>
+          </div>
             <div class="card-body">
 
-                <h5>Nota Lengkap</h5>
-                <hr>
                 <div class="row">
                     <div class="col-3 text-right"><b>Nama :</b></div>
                     <div class="col-9">{{$nota->pelanggan->nama}}</div>
@@ -46,7 +50,7 @@
                     </table>
 
 
-                    <p><b>Keterangan :</b></p>
+                    <p><b>Kerusakan :</b></p>
                     <div class="card card-warning card-outline">
                         <div class="card-header">
                           <h5 class="card-title">{{$nota->keterangan}}</h5>
@@ -58,8 +62,6 @@
                           </div>
                         </div>
                       </div>
-                      <hr>
-                      <p><b>Pengeluaran</b> : @if(!empty($nota->notaDetail->pengeluaran)) @currency($nota->notaDetail->pengeluaran) @else 0 @endif</p>
                       <p><b>Total Bayar</b> : @if(!empty($nota->notaDetail->pemasukan)) @currency($nota->notaDetail->pemasukan) @else 0 @endif</p>
                 </div>
 

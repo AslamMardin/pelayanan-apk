@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\NotasExport;
-use App\Models\Nota;
-use Illuminate\Http\Request;
-use App\Http\Requests\NotaRequest;
 use Carbon\Carbon;
+use App\Models\Nota;
+use App\Exports\NotasExport;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Requests\NotaRequest;
 
 class NotaController extends Controller
 {
@@ -122,4 +123,11 @@ class NotaController extends Controller
 
         return (new NotasExport)->status('S')->download('nota-'.Carbon::now()->format('d-mY').'.xlsx');  
       }
+
+      public function pdfView($nota)
+      {
+    $notas = Nota::with('notaDetail', 'pelanggan')->where('id', $nota)->first();
+    $pdf = Pdf::loadView('nota.nota_view_pdf', ['nota' =>$notas]);
+    return $pdf->download('nota-'.$notas->pelanggan->nama.'-'.Carbon::now()->timestamp.'.pdf');
+    }
 }
