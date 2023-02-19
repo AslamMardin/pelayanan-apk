@@ -5,11 +5,11 @@
 
 <div class="card">
     <div class="card-header border-0">
-      <h3 class="card-title text-danger">DAFTAR PELANGGAN TERHAPUS</h3>
+      <h3 class="card-title">DAFTAR PELANGGAN TERHAPUS</h3>
       <div class="card-tools">
        
-        <a href="{{route('workit.pelanggan')}}" class="btn btn-dark btn-sm">
-         Kembali
+        <a href="{{route('workit.pelanggan')}}" class="btn btn-secondary btn-sm">
+          <i class="bi bi-arrow-90deg-left"></i>
         </a>
       </div>
     </div>
@@ -38,13 +38,13 @@
                     <td>
                     <div class="d-flex">
 
-                        <a href="{{route('pelanggan.restore', ['id' => $pelanggan->id])}}" class="btn btn-sm btn-primary"  onclick="return confirm('ingin menghapus restore pelanggan {{$pelanggan->nama}} ?')">Restore</a>
+                        <a href="{{route('pelanggan.restore', ['id' => $pelanggan->id])}}" class="btn btn-sm btn-primary"  onclick="return confirm('ingin mengembalikan pelanggan {{$pelanggan->nama}} ?')"><i class="bi bi-arrow-clockwise"></i></a>
                         <form action="{{route('pelanggan.hapus', ['id' => $pelanggan->id])}}" method="post">
                             @method('DELETE')
                             @csrf
-                            <input type="submit" value="Hapus" onclick="return confirm('ingin menghapus permanent {{$pelanggan->nama}} ?')"  class="btn btn-sm btn-danger ml-1"/>
+                            <button type="submit" value="Hapus" onclick="return confirm('ingin menghapus permanent {{$pelanggan->nama}} ?')"  class="btn btn-sm btn-danger ml-1"><i class="bi bi-trash-fill"></i></button>
                         </form>
-                      
+                        
                     </div>
                     </td>
                 </tr>

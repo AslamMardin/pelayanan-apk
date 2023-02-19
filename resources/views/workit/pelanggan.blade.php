@@ -38,27 +38,33 @@
                 <th scope="col">NOMOR</th>
                 <th scope="col">ALAMAT</th>
                 <th scope="col">JK</th>
+                <th scope="col" width="30">LANGGANAN</th>
                 <th scope="col">AKSI</th>
               </tr>
             </thead>
             <tbody>
-                @forelse ($com_pelanggans as $pelanggan)
+                @forelse ($pelanggans as $pelanggan)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{ $pelanggan->nama }}</td>
                     <td>{{ $pelanggan->nomor }}</td>
                     <td>{{ $pelanggan->alamat }}</td>
                     <td>{{ $pelanggan->jenis_kelamin }}</td>
+                    <td  align="center">@if($pelanggan->nota_count >= 2) <i class="bi bi-emoji-kiss-fill text-success"></i>@endif</td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic example">
                       <form method="post" action="{{route('pelanggan.destroy', ['pelanggan' => $pelanggan->id])}}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Anda yakin ingin hapus {{ $pelanggan->nama  }} ?')" class="btn btn-sm btn-danger d-inline">Hapus</button>
+                        <button type="submit" onclick="return confirm('Anda yakin ingin hapus {{ $pelanggan->nama  }} ?')" class="btn btn-sm btn-danger d-inline"><i class="bi bi-trash"></i></button>
                       </form>
                        
-                       <a href="{{route('pelanggan.edit', ['pelanggan' => $pelanggan->id])}}" class="btn btn-sm btn-info">Ubah</a>
+                       <a href="{{route('pelanggan.edit', ['pelanggan' => $pelanggan->id])}}" class="btn btn-sm btn-info"><i class="bi bi-pencil-square"></i></a>
+                       @if($pelanggan->nota_count > 0)
+                       <a href="{{route('pelanggan.show', ['pelanggan' => $pelanggan->id])}}" class="btn btn-sm btn-primary"><i class="bi bi-clock-history"></i></a>
+                       @endif
                       </div>
+                    </div>
                     </td>
                 </tr>
                 @empty

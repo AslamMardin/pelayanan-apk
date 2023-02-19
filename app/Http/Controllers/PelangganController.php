@@ -11,6 +11,7 @@ use App\Imports\PelanggansImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\PelangganRequest;
 use Illuminate\Support\Facades\Validator;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class PelangganController extends Controller
 {
@@ -22,8 +23,11 @@ class PelangganController extends Controller
     public function index()
     {
         $pelangganTrashed = Pelanggan::onlyTrashed()->orderBy('nama', 'asc')->get();
+        $pelanggans = Pelanggan::withCount('nota')->get();
+
         return view('workit.pelanggan', [
-            'pelangganTrashed' =>count($pelangganTrashed)
+            'pelangganTrashed' =>count($pelangganTrashed),
+            'pelanggans' =>$pelanggans,
         ]);
     }
 
@@ -78,7 +82,12 @@ class PelangganController extends Controller
      */
     public function show($id)
     {
-        //
+        $pelanggan = Pelanggan::with('nota')->whereHas('nota', function($q) use($id){
+            $q->where('pelanggan_id', $id);
+        })->first();
+        return view('pelanggan.show', [
+            'pelanggan' => $pelanggan
+        ]);
     }
 
     /**
@@ -126,7 +135,7 @@ class PelangganController extends Controller
     {
         $pelanggan =  Pelanggan::find($id);
         $pelanggan->delete();
-        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil dihapus");
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama masuk tempat sampah");
     }
 
     public function sampah()
@@ -148,7 +157,7 @@ class PelangganController extends Controller
     {
         $pelanggan = Pelanggan::withTrashed()->findOrFail($id);
         $pelanggan->restore();
-        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil di restore");
+        return redirect()->route('workit.pelanggan')->with('pesan', "Data Pelanggan $pelanggan->nama Berhasil di kembalikan");
     }
 
     public function export()
